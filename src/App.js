@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import Footer from './components/general/Footer.js';
+import Submission from './components/page-submissions/App.js';
+import Management from './components/page-management/App.js';
+import ThanksPage from './components/general/PageThanks';
+import PageNotFound from './components/general/PageNotFound';
 import './App.css';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import { routeURLs as url } from './config';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <div className="App">
+                {/*currentPage*/}
+                <Switch>
+                    <Route exact path='/'><Redirect to={url.submissionPage} /></Route>
+                    <Route exact path={url.submissionPage} component={Submission} />
+                    <Route exact path={url.managementPage} component={Management} />
+                    <Route exact path={url.thanksPage}     component={ThanksPage} />
+                    <Route component={PageNotFound} />
+                </Switch>
+                <Footer/>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
