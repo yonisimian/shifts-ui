@@ -3,22 +3,23 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 function App(props) {
-  return (
-    <Modal show={props.show} onHide={props.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{props.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleClose}>
-            ביי
-          </Button>
-          <Button variant="primary" onClick={props.handleClose}>
-            אחלה
-          </Button>
-        </Modal.Footer>
-    </Modal>
-  );
+    const titles = ['תודה רבה', 'תודוש', 'אש עליך', 'יפה מאוד', 'הצליח לך הפעם']
+    const bodyText = 'המשמרות הוגשו בהצלחה'
+    const buttonTexts = ['אחלה', 'מגניב', 'יש לי טחורים', 'ווהוווו', 'ביי', 'אסטה לה ווינדוס וויסטה']
+    let title = titles[Math.floor(Math.random() * titles.length)] + '!'
+    return (
+        <Modal show={props.show} onHide={props.handleClose} animation={false}>
+            <Modal.Header closeButton>
+                <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className='text-align-right'>{bodyText}</Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={props.handleClose}>
+                    {buttonTexts[Math.floor(Math.random() * buttonTexts.length)]}
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    );
 }
 
 

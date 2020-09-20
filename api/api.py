@@ -30,26 +30,27 @@ def form_example():
         name = request.form.get('name')
         date = request.form.get('week')
         shifts = [request.form.get(f'shift-{i}') for i in range(0,21)]
+        comments = request.form.get('comments')
 
         cons_table = db.table("Constraints")
         
         # TODO: check if the cons already exist. Maybe upsert func will serve me best here.
         # maybe search for the name and date and then upsert...
-        inserted = cons_table.insert({"name":name, "date":date, "shifts":shifts})
+        inserted = cons_table.insert({"name":name, "date":date, "shifts":shifts, "comments":comments})
 
+        print(comments)
         return jsonify(inserted)
 
 @app.route('/allData')
 def get_all_data():
     cons_table = db.table("Constraints")
-
     return cons_table.all()[len(cons_table) - 1]
 
 @app.route('/empconstraints', methods=['GET', 'POST'])
 def get_emp_constraints():
     if request.method == 'GET': # TODO(yoni the front man): Change to post to handle form post.
 
-        name = 'גיא שמיליאן'
+        name = request.values['name']
         # TODO(yoni the front man): Change to the next line for request handling:
         # name = request.form.get('name')
         

@@ -13,8 +13,8 @@ function App(props) {
         <Form.Row>
             {title}
             <Col xs="9">
-                <Form.Control as="select" name="name">
-                    {/*<option value="" disabled selected>בחר/י בקר/ית</option>*/}
+                <Form.Control as="select" name="name" onChange={props.onChange}>
+                    {props.showChooseBakar ? <option value="" disabled selected>בחר/י בקר/ית</option> : ''}
                     {bakarim_options}
                 </Form.Control>
             </Col>

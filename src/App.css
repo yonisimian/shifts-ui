@@ -55,6 +55,14 @@ u {
   display:inline-block;
 }
 
+.text-align-right {
+  text-align: right;
+}
+
+
+.submission-form {
+  max-width: 800px;
+}
 
 @keyframes App-logo-spin {
   from {
