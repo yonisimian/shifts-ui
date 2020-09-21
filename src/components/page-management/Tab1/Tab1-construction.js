@@ -31,7 +31,7 @@ function App() {
     }, [week])
 
     return (
-        <main className="App">
+        <main className="min-size-900">
             <NoShiftsAlert bakarim={remain_bakarim} week={week} />
             <Jumbotron>
                 <Container fluid>

@@ -12,7 +12,7 @@ function App() {
     <th>{day}</th>
   )
   return (
-    <div className="App">
+    <div className="min-size-600">
       <Table striped bordered hover size="sm">
         <tr>
           <th></th>
