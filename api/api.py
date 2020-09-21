@@ -10,7 +10,7 @@ app = Flask(__name__)
 db = TinyDB('db.json')
 
 @app.route('/submitconstraints', methods=['GET', 'POST'])
-def form_example():
+def form_example(): # TODO: check with yoni if the name of the function is relevant.
     if request.method == 'POST':
         name = request.form.get('name')
         date = request.form.get('week')
@@ -28,12 +28,28 @@ def form_example():
 
         return ({'submitted data': inserted})
 
+@app.route('/submitschedule', methods=['POST'])
+def submit_schedule():
+    if request.method == 'POST':
+        pass
+    # TODO: figure out what are the names of each element.
+
 @app.route('/allData')
 def get_all_data():
     cons_table = db.table('Constraints')
     # TODO: return the data ordered by date (newest to oldest)
+    
     return ({'all_data' : cons_table.all()})
-    #return cons_table.all()[len(cons_table) - 1]
+
+@app.route('/schedules', methods=['GET'])
+def get_schedules():
+    if request.method == 'GET':
+        schedules_table = db.table("Schedules")
+
+        schedules_table.truncate()
+        schedules_table.insert({"name": 'guy'})
+
+        return ({'schedules' : schedules_table.all()})
 
 @app.route('/empconstraints', methods=['GET', 'POST'])
 def get_emp_constraints():

@@ -32,6 +32,7 @@ function App() {
 
     return (
         <main className="min-size-900">
+            <br></br>
             <NoShiftsAlert bakarim={remain_bakarim} week={week} />
             <Jumbotron>
                 <Container fluid>
@@ -43,7 +44,7 @@ function App() {
                             <Col sm="1" />
                         </Row>
                         <Row>
-                            <Col sm="12"><Table /></Col>
+                            <Col sm="12"><Table week={week} /></Col>
                         </Row>
                         <Button variant="primary" type="submit">שגר!</Button>
                     </form>
