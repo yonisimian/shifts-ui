@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Header from '../general/Header.js';
-import Tab1 from "./Tab1-construction";
+import Tab1 from "./Tab1/Tab1-construction";
 import Tab2 from "./Tab2-specials";
 import Tab3 from "./Tab3-constraints";
 import Tab4 from "./Tab4-history";

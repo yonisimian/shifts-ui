@@ -8,9 +8,7 @@ function App() {
   return (
     <div>
       <Header title="טופס הגשת משמרות שבועיות" />
-      <Jumbotron>
-        <Main />
-      </Jumbotron>
+      <Main />
     </div>
   );
 }

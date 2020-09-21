@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 
 function App(props) {
+    // TODO: get the Bakarim list from the DB
     const bakarim_options = myConfig.bakarim.map((name) => 
         <option value={name}>{name}</option>
     )
@@ -13,7 +14,11 @@ function App(props) {
         <Form.Row>
             {title}
             <Col xs="9">
-                <Form.Control as="select" name="name" onChange={props.onChange}>
+                <Form.Control
+                    as="select"
+                    name="name"
+                    onChange={props.onChange}
+                >
                     {props.showChooseBakar ? <option value="" disabled selected>בחר/י בקר/ית</option> : ''}
                     {bakarim_options}
                 </Form.Control>

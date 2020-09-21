@@ -10,10 +10,12 @@ function App(props) {
             {title}
             <Col xs="9">
                 <Form.Control
-                    type="week" 
+                    type="week" // TODO: make it from sunday to saturday
                     id="week" 
-                    name="week" 
+                    name="week"
+                    min="2020-W01" 
                     defaultValue={getWeek(props.defaultWeek)} 
+                    onChange={props.onChange}
                     required
                 />
             </Col>

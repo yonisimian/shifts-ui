@@ -1,29 +1,35 @@
 import React, {useState, useEffect} from 'react'
-import BlocksTable from './blocks-table/Table'
-import ChooseBakar from '../general/chooseBakar.js'
+import BlocksTable from '../blocks-table/Table'
+import ChooseBakar from '../../general/chooseBakar.js'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import { Container, Row, Col} from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
-function App() {
+
+function App(props) {
     const [items, setItems] = useState(null)
-    const [a, setA] = useState(0)
+    const [curEmp, setCurEmp] = useState('')
 
     const handleChange = (e) => {
-        fetch("/empconstraints?name="+e.target.value, {method: 'GET'})
+        let name = (typeof e == typeof 'string') ? e : e.target.value
+        fetch("/empweekconstraints?name="+name+"&week="+props.week,
+            {method: 'GET'})
         .then(res => res.json())
         .then((result) => {
             setItems({
-                'name': result['emp_constraints'][0].name,
-                'date': result['emp_constraints'][0].date,
-                'shifts': result['emp_constraints'][0].shifts,
-                'comments': result['emp_constraints'][0].comments
+                'name': result.name,
+                'date': result.date,
+                'shifts': result.shifts,
+                'comments': result.comments
             })
-            //setA(result.shifts)
+            setCurEmp(name)
         })
         .catch(error => {
-            alert(error + '\n(כנראה שהבקר לא הגיש משמרות)')
+            setItems(null)
+            //alert("showConstraintsOf error: " + error)
         })
     }
+
+    useEffect(() => handleChange(curEmp), [props.week])
 
     return (
         <Jumbotron>
@@ -40,8 +46,11 @@ function App() {
                 </Row>
                 <br></br>
                 <Row>
-                    {/*TODO: import relevant block-table from database*/}
-                    {items != null ? <BlocksTable name={items.name} week={items.date} blocks={Object.values(a)}/> : ''}
+                    {items != null ? <BlocksTable
+                                        name={items.name}
+                                        week={items.date}
+                                        blocks={items.shifts}
+                                        comments={items.comments}/> : ''}
                 </Row>
             </Container>
         </Jumbotron>

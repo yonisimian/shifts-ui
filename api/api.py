@@ -9,21 +9,6 @@ app = Flask(__name__)
 # DB config
 db = TinyDB('db.json')
 
-
-@app.route('/time')
-def index():
-    return {'time': time.time()}
-
-@app.route('/block', methods=['GET', 'POST'])
-def shift_blocks():
-    if request.method == 'POST':
-        pass
-        #TODO: what happens when the user posts blocked shifts.
-
-    else :
-        pass
-        #TODO: what happens when the user gets the page initially.
-
 @app.route('/submitconstraints', methods=['GET', 'POST'])
 def form_example():
     if request.method == 'POST':
@@ -32,52 +17,58 @@ def form_example():
         shifts = [request.form.get(f'shift-{i}') for i in range(0,21)]
         comments = request.form.get('comments')
 
-        cons_table = db.table("Constraints")
+        cons_table = db.table('Constraints')
+        user = Query()
         
-        # TODO: check if the cons already exist. Maybe upsert func will serve me best here.
-        # maybe search for the name and date and then upsert...
-        inserted = cons_table.insert({"name":name, "date":date, "shifts":shifts, "comments":comments})
+        inserted = cons_table.upsert({"name":name, "date":date, "shifts":shifts, "comments":comments},
+                   ((user.name == name) & (user.date == date)))
 
-        print(comments)
-        return jsonify(inserted)
+        # print(inserted)
+        # TODO: check what does upsert returns.
+
+        return ({'submitted data': inserted})
 
 @app.route('/allData')
 def get_all_data():
-    cons_table = db.table("Constraints")
-    return cons_table.all()[len(cons_table) - 1]
+    cons_table = db.table('Constraints')
+    # TODO: return the data ordered by date (newest to oldest)
+    return ({'all_data' : cons_table.all()})
+    #return cons_table.all()[len(cons_table) - 1]
 
 @app.route('/empconstraints', methods=['GET', 'POST'])
 def get_emp_constraints():
-    if request.method == 'GET': # TODO(yoni the front man): Change to post to handle form post.
+    if request.method == 'GET':
 
         name = request.values['name']
-        # TODO(yoni the front man): Change to the next line for request handling:
-        # name = request.form.get('name')
         
-        cons_table = db.table("Constraints")
+        cons_table = db.table('Constraints')
         user = Query()
 
         return ({'emp_constraints': cons_table.search(user.name == name)})
 
 @app.route('/weekconstraints', methods=['GET', 'POST'])
 def get_week_constraints():
-    if request.method == 'GET': # TODO(yoni the front man): Change to post to handle form post.
+    if request.method == 'GET':
 
-        # Returns the current week num
-        today = datetime.date.today().isocalendar()
-        date_to_search = f'{today[0]}-W{today[1] + 1}'
+        week_to_search = request.values['week']
         
-        # TODO(yoni the front man): Change to the next line for request handling:
-        # date_to_search = request.form.get('date')
-        
-        cons_table = db.table("Constraints")
+        cons_table = db.table('Constraints')
         user = Query()
         
-        return ({'week_constraints': cons_table.search(user.date == date_to_search)})
+        return ({'week_constraints': cons_table.search(user.date == week_to_search)})
+
+@app.route('/empweekconstraints', methods=['GET', 'POST'])
+def get_emp_week_constraints():
+    if request.method == 'GET':
+        name = request.values['name']
+        week = request.values['week']
+
+        cons_table = db.table('Constraints')
+        user = Query()
+
+        return (cons_table.search((user.name == name) & (user.date == week))[0])
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
 
 #made by: Guy the back man 8-) (works from the back :))

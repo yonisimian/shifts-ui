@@ -23,6 +23,7 @@ function App(props) {
         {table_rows}
 
       </Table>
+      <textarea disabled>{props.comments}</textarea>
     </div>
   );
 }

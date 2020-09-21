@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react'
-import Table from './submission-table/Table.js'
-import ChooseBakar from '../general/chooseBakar.js'
-import ChooseWeek from '../general/chooseWeek.js'
+import Table from './submission-table/Table'
+import ChooseBakar from '../general/chooseBakar'
+import ChooseWeek from '../general/chooseWeek'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 import Modal from './Modal'
 
 function App() {
@@ -33,24 +34,26 @@ function App() {
     return (
         <main className="submission-form">
             <Modal show={isModalShown} handleClose={hideModal} />
-            <Form /*action='submitconstraints'*/ ref={form} onSubmit={handleSubmit} method='POST'>
-                <Form.Group>
-                    <Col sm="6"><ChooseBakar withTitle={true}/></Col>
-                </Form.Group>
-                <Form.Group>
-                    <Col sm="6"><ChooseWeek defaultWeek={1} withTitle={true}/></Col>
-                </Form.Group>
-                <Form.Group>
-                    <Table />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Row>
-                        <Form.Label className="text-align-right">הערות: </Form.Label>
-                        <Form.Control as="textarea" name='comments' rows="4" />
-                    </Form.Row>
-                </Form.Group>
-                <Button variant="primary" type="submit">שלח/י</Button>
-            </Form>
+            <Jumbotron>
+                <Form ref={form} onSubmit={handleSubmit} method='POST'>
+                    <Form.Group>
+                        <Col sm="6"><ChooseBakar withTitle={true}/></Col>
+                    </Form.Group>
+                    <Form.Group>
+                        <Col sm="6"><ChooseWeek defaultWeek={1} withTitle={true}/></Col>
+                    </Form.Group>
+                    <Form.Group>
+                        <Table />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Row>
+                            <Form.Label className="text-align-right">הערות: </Form.Label>
+                            <Form.Control as="textarea" name='comments' rows="4" />
+                        </Form.Row>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">שלח/י</Button>
+                </Form>
+            </Jumbotron>
         </main>
     );
 }
