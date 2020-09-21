@@ -17,7 +17,7 @@ function App(props) {
         .then((result) => {
             setItems({
                 'name': result.name,
-                'date': result.date,
+                'week': result.week,
                 'shifts': result.shifts,
                 'comments': result.comments
             })
@@ -48,7 +48,7 @@ function App(props) {
                 <Row>
                     {items != null ? <BlocksTable
                                         name={items.name}
-                                        week={items.date}
+                                        week={items.week}
                                         blocks={items.shifts}
                                         comments={items.comments}/> : ''}
                 </Row>

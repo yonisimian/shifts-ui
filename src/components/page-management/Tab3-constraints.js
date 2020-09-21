@@ -24,7 +24,7 @@ function App() {
                 <Row>
                     <BlocksTable
                         name={value.name}
-                        week={value.date}
+                        week={value.week}
                         blocks={value.shifts}
                         comments={value.comments}/>
                 </Row>)
@@ -47,7 +47,7 @@ function App() {
                 <Row>
                     <BlocksTable
                         name={value.name}
-                        week={value.date}
+                        week={value.week}
                         blocks={value.shifts}
                         comments={value.comments}/>
                 </Row>)

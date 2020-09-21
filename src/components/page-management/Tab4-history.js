@@ -11,11 +11,11 @@ function App() {
         fetch('/allData', {method: 'GET'})
         .then(res => res.json())
         .then(data => {
-            setShifts(data['all_data'].map(value => 
+            setShifts(data['all_data']['Constraints'].map(value => 
                 <Row>
                     <BlocksTable
                         name={value.name}
-                        week={value.date}
+                        week={value.week}
                         blocks={value.shifts}
                         comments={value.comments}/>
                 </Row>)
