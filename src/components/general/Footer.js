@@ -6,11 +6,12 @@ import Nav from 'react-bootstrap/Nav'
 function App() {
   return (
     <footer className="footer navbar-fixed-bottom">
-      <h5>Created by Guy Shamilian & Yehonatan Simian © 2020</h5>
+      <h6>Created by Guy Shamilian & Yehonatan Simian © 2020</h6>
       <Nav>
-        <ul>
+        <ul className='text-align-right'>
           <li><NavLink to={url.submissionPage}>הגשת משמרות</NavLink></li>
           <li><NavLink to={url.managementPage}>ניהול משמרות</NavLink></li>
+          <li><NavLink to={url.adminPage}>אדמיניסטרציופוליניזיה</NavLink></li>
         </ul>
       </Nav>
     </footer>

@@ -1,16 +1,15 @@
-import React from 'react';
-import Header from '../general/Header.js';
-import Main from "./Main.js";
-import '../../App.css';
-import { Jumbotron } from 'react-bootstrap';
+import React from 'react'
+import Header from '../general/Header'
+import Main from "./Main"
+import Main2 from './Main2'
+import '../../App.css'
+import { Jumbotron } from 'react-bootstrap'
 
 function App() {
   return (
     <div>
       <Header title="דף אדמין" />
-      <Jumbotron>
-        <Main />
-      </Jumbotron>
+      <Main2 />
     </div>
   );
 }

@@ -11,7 +11,7 @@ function App(props) {
   return (
     <td>
       <Form.Control as="select" name="" id="" required>
-        <option value="" selected>---</option>
+        <option value="" selected>-{props.bakarim.length}-</option>
         {bakarim_options}
         {/*TODO: if there's only 1 bakar, choose him in advance*/}
       </Form.Control>

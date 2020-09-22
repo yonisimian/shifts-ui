@@ -58,6 +58,15 @@ u {
   color: red;
 }
 
+.red-border {
+  border: 2px solid red;
+  border-radius: 4px;
+}
+
+#tep td {
+  padding: 0;
+}
+
 .try {
   vertical-align: bottom;
   display:inline-block;

@@ -11,9 +11,9 @@ function App(props) {
     .then(res => res.json())
     .then((result) => {
         setArr(Array.from(Array(21).keys())
-        .map(i => bakarimTEMP
-        .filter(bakar => result['week_constraints']
-        .filter(v => v.name === bakar)[0].shifts[i]==null)))
+          .map(i => bakarimTEMP
+          .filter(bakar => result['week_constraints']
+          .filter(v => v.name === bakar)[0].shifts[i]==null)))
     })
     .catch(error => {
         setArr(Array.from(Array(21).keys()).map(i => bakarimTEMP))

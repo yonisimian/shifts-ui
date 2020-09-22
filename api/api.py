@@ -134,8 +134,8 @@ def add_employee():
     '''
 
     if request.method == 'POST':
-        full_name = request.values['full_name']
-        short_name = request.values['short_name']
+        full_name = request.form.get('full_name')
+        short_name = request.form.get('short_name')
 
         emps_table = db.table('Employees')
         user = Query()
@@ -153,7 +153,9 @@ def remove_employee():
     '''
 
     if request.method == 'POST':
-        full_name = request.values['full_name']
+        data = request.get_json()
+
+        full_name = data['full_name']
 
         emps_table = db.table('Employees')
         user = Query()
@@ -161,6 +163,18 @@ def remove_employee():
         removed = emps_table.remove(user.full_name == full_name)
 
         return (removed)
+
+@app.route('/getemployees', methods=['GET', 'POST'])
+def get_emps():
+
+    '''
+    Returns all of the employees from the DB.
+    '''
+
+    if request.method == 'GET':
+        emps_table = db.table('Employees')
+        #return (emps_table.all()[0])
+        return ({'all_emps': emps_table.all()})
 
 if __name__ == '__main__':
     app.run(debug=True)
