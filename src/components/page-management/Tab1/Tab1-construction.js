@@ -1,22 +1,26 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef } from 'react'
 import Table from '../constraction-table/Construction Table'
 import ShowConstraintOf from './ShowContraintOf'
-import NoShiftsAlert from './Alert'
+import NoShiftsAlert from './NoShiftsAlert'
+import NoSubmitAlert from './NoSubmitAlert'
 import ChooseWeek from '../../general/chooseWeek.js'
 import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import { Container, Row, Col, Alert} from 'react-bootstrap'
+import { Container, Row, Col} from 'react-bootstrap'
 import { getWeek } from '../../../scripts'
 import { myConfig } from '../../../config'
 
 function App() {
+    const form = useRef(null)
     const [week, setWeek] = useState(getWeek(1))
     const [consJumbo, setConsJumbo] = useState(<ShowConstraintOf week={week} />)
     const handleChange = (e) => {
+        setShowAlert2(false)
         setWeek(e.target.value)
         setConsJumbo(<ShowConstraintOf week={e.target.value} />)
     }
 
+    const [showAlert2, setShowAlert2] = useState(false)
     const [remain_bakarim, setRB] = useState(myConfig.bakarim) // TODO: get Bakarim from the DB
     useEffect(() => {
         fetch("/weekconstraints?week="+week, {method: 'GET'})
@@ -32,26 +36,25 @@ function App() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        let items = Array.from(document.getElementsByClassName('select-bakarim'))
-        items.map(item => alert(item.value))
-        alert('s')
+        let data = new FormData(form.current)
     }
 
     return (
         <main className="min-size-900">
             <br></br>
-            <NoShiftsAlert bakarim={remain_bakarim} week={week} />
+            <NoShiftsAlert bakarim={remain_bakarim} week={week}/>
+            <NoSubmitAlert showAlert={showAlert2} />
             <Jumbotron>
                 <Container fluid>
-                    <form onSubmit={handleSubmit} method="post">
+                    <form ref={form} onSubmit={handleSubmit} method="post">
                         <Row>
                             <Col sm="2" />
-                            <Col sm="4"><h3>הכנת הסידור לשבוע: </h3></Col>        
+                            <Col sm="4"><h3 onClick={() => alert(showAlert2)}>הכנת הסידור לשבוע: </h3></Col>        
                             <Col sm="5"><ChooseWeek defaultWeek={1} onChange={handleChange}/></Col>
                             <Col sm="1" />
                         </Row>
                         <Row>
-                            <Col sm="12"><Table week={week} /></Col>
+                            <Col sm="12"><Table week={week} setShowAlert2={(e) => setShowAlert2(e)} /></Col>
                         </Row>
                         <Button variant="primary" type="submit">שגר!</Button>
                     </form>

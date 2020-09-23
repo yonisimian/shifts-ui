@@ -14,7 +14,7 @@ function App(props) {
             </Modal.Header>
             <Modal.Body className='text-align-right'>{bodyText}</Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={props.handleClose}>
+                <Button variant="primary" onClick={props.handleClose} autoFocus>
                     {buttonTexts[Math.floor(Math.random() * buttonTexts.length)]}
                 </Button>
             </Modal.Footer>

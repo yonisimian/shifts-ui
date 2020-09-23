@@ -10,10 +10,12 @@ function App(props) {
     fetch("/weekconstraints?week="+props.week, {method: 'GET'})
     .then(res => res.json())
     .then((result) => {
-        setArr(Array.from(Array(21).keys())
-          .map(i => bakarimTEMP
-          .filter(bakar => result['week_constraints']
-          .filter(v => v.name === bakar)[0].shifts[i]==null)))
+      let wow = Array.from(Array(21).keys())
+                     .map(i => bakarimTEMP
+                     .filter(bakar => result['week_constraints']
+                     .filter(v => v.name === bakar)[0].shifts[i]==null))
+        setArr(wow)
+        wow.map(list => list.length == 0 ? props.setShowAlert2(true) : void 0)
     })
     .catch(error => {
         setArr(Array.from(Array(21).keys()).map(i => bakarimTEMP))

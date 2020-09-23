@@ -32,7 +32,7 @@ function App(props) {
                     onChange={props.onChange}
                 >
                     {props.showChooseBakar ? <option value="" disabled selected>בחר/י בקר/ית</option> : ''}
-                    {b2}
+                    {bakarim_options}
                     {props.addNew ?
                         <>
                             <option disabled>--------</option>
