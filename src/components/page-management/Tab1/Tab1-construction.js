@@ -30,13 +30,20 @@ function App() {
         .catch(error => alert("tab1 error: " + error))
     }, [week])
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let items = Array.from(document.getElementsByClassName('select-bakarim'))
+        items.map(item => alert(item.value))
+        alert('s')
+    }
+
     return (
         <main className="min-size-900">
             <br></br>
             <NoShiftsAlert bakarim={remain_bakarim} week={week} />
             <Jumbotron>
                 <Container fluid>
-                    <form action="/supersonic" method="post">
+                    <form onSubmit={handleSubmit} method="post">
                         <Row>
                             <Col sm="2" />
                             <Col sm="4"><h3>הכנת הסידור לשבוע: </h3></Col>        
