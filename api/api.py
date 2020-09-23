@@ -54,7 +54,7 @@ def submit_schedule():
 def get_all_data():
 
     '''
-        Returns all of the constraints and schedules.
+    Returns all of the constraints and schedules.
     '''
 
     cons_table = db.table('Constraints')
@@ -63,7 +63,7 @@ def get_all_data():
     
     return ({'all_data' :
                 {'Constraints' : cons_table.all(),
-                'Schedules' : schedules_table.all()}
+                 'Schedules' : schedules_table.all()}
             })
 
 @app.route('/schedules', methods=['GET'])

@@ -1,44 +1,42 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {Jumbotron, Container, Row, Col, Table, Button, Form} from 'react-bootstrap'
-import { findAllInRenderedTree } from 'react-dom/test-utils'
+import _ from 'lodash'
 import Bakar from './Bakar2'
 
 function App() {
-    const [bakarim, setBakarim] = useState([''])
-    const [editable, setEditable] = useState(false)
+    const [bakarim, setBakarim] = useState()
+    const [original, setOriginal] = useState()
+    const [isEditable, setisEditable] = useState(false)
 
     useEffect(() => {
         fetch('/getemployees', {method: 'GET'})
         .then(res => res.json())
         .then(data => {
-            setBakarim(data['all_emps'].map((value, key) => 
-                <Bakar bakar={value} id={key} editable={editable} removeBakar={() => removeLine(key)}/>
-            ))
-            
+            setBakarim(data['all_emps'])
+            setOriginal(_.clone(data['all_emps']))
         })
         .catch(error => alert(error))
-    }, [editable])
+    }, [])
 
     const saveChanges = () => {
-        setEditable(false)
+        setisEditable(false)
     }
 
     const cancelChanges = () => {
-        setEditable(false)
+        setBakarim(original)
+        setisEditable(false)
     }
 
-    const addLine = () => {
-        setBakarim([...bakarim, <Bakar
-                                    bakar={{}}
-                                    id={bakarim.length}
-                                    editable={editable}
-                                    removeBakar={() => removeLine(bakarim.length)} />])
+    const addBakar = () => {
+        setBakarim([...bakarim, {}])
     }
 
-    const removeLine = (id) => {
+    const removeBakar = (id) => {
         //alert('TODO: add are you sure?')
-        //setBakarim(bakarim.filter((value, key) => key != id))
+        //alert("id: " + id + ", new length: " + bakarim.slice(0, id).concat(bakarim.slice(id + 1, bakarim.length)).length)
+        //setBakarim(bakarim.splice(id, 1))
         setBakarim(bakarim.slice(0, id).concat(bakarim.slice(id + 1, bakarim.length)))
+        //setBakarim(bakarim.filter((val, key) => key !== id))
         /*let data = {
             full_name: ''
         }
@@ -52,7 +50,7 @@ function App() {
         .then(res => res)
         .then(data => {
             alert(data.ok ? "removed succsessfuly" : 'not removed')
-            setEditable(!editable)
+            setisEditable(!isEditable)
         })
         .catch(error => alert(error))*/
     }
@@ -62,18 +60,15 @@ function App() {
             <Jumbotron>
                 <Container fluid>
                     <Row>
-                        <Col md="1" />
-                        <Col md="10"><h3>רשימת בקרים</h3></Col>
-                        <Col md="1" />
+                        <Col md="12"><h3>רשימת בקרים</h3></Col>
                     </Row>
-                    <br></br>
                     <Row>
-                        {!editable ?
-                            <Button variant="outline-primary" onClick={() => setEditable(true)}>ערוך</Button>
+                        {!isEditable ?
+                            <Button variant="outline-primary" onClick={() => setisEditable(true)}>ערוך</Button>
                         :
                             <>
-                            <Button variant="outline-success" onClick={saveChanges}>שמירה</Button>
-                            <Button variant="outline-secondary" onClick={cancelChanges}>ביטול</Button>
+                                <Button variant="outline-success" onClick={saveChanges}>שמירה</Button>
+                                <Button variant="outline-secondary" onClick={cancelChanges}>ביטול</Button>
                             </>
                         }
                     </Row>
@@ -84,19 +79,25 @@ function App() {
                                     <th></th>
                                     <th>שם מלא</th>
                                     <th>שם מקוצר</th>
-                                    {editable ? <th></th> : ''}
+                                    {isEditable && bakarim.length > 0 && <th/>}
                                 </tr>
                             </thead>
                             <tbody>
-                                {bakarim}
-                                {editable ?
+                                {(bakarim || []).map((bakar, index) => (
+                                    <Bakar
+                                        data={bakar}
+                                        lineNumber={index+1}
+                                        isEditable={isEditable}
+                                        removeSelf={() => removeBakar(index)} />
+                                ))}
+                                {isEditable &&
                                     <tr>
                                         <td />
-                                        <td><Button variant="outline-primary" onClick={addLine}>הוסף בקר חדש</Button></td>
+                                        <td><Button variant="outline-primary" onClick={addBakar}>הוסף בקר חדש</Button></td>
                                         <td />
-                                        <td />
+                                        {bakarim.length > 0 && <td />}
                                     </tr>
-                                : '' }
+                                }
                             </tbody>
                         </Table>
                     </Row>
