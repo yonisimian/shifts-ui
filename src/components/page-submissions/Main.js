@@ -51,7 +51,7 @@ function App() {
                             <Form.Control as="textarea" name='comments' rows="4" />
                         </Form.Row>
                     </Form.Group>
-                    <Button variant="primary" type="submit">שלח/י</Button>
+                    <Button variant="outline-primary" type="submit">שלח/י</Button>
                 </Form>
             </Jumbotron>
         </main>

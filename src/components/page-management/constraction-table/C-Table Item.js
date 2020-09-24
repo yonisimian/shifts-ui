@@ -10,7 +10,7 @@ function App(props) {
   const temp = bakarim.length == 1 ? { value: bakarim[0], label: bakarim[0] } : undefined
 
   const [isRequired, setIsRequired] = useState(true)
-  const [myValue, setMyValue] = useState(temp)
+  const [myValue, setMyValue] = useState()
 
   return (
     <td>
@@ -19,7 +19,7 @@ function App(props) {
           className="select-bakarim"
           // TODO: add colors via styles
           placeholder={'-'+bakarim.length+'-'}
-          value={temp}
+          //value={temp}
           options={bakarim_options2}
           onChange={value => {
             setIsRequired(value == null || value.length === 0)
@@ -29,11 +29,11 @@ function App(props) {
         />
           {
             <input
-              name={"shift"+props.id}
+              name={"shift-"+props.id}
               tabIndex={-1}
               autoComplete="off"
               style={{ opacity: 0, height: 0 }}
-              value={myValue}
+              value={JSON.stringify(myValue)}
               required={isRequired}
             />
           }

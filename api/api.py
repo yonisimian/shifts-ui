@@ -43,12 +43,18 @@ def submit_schedule():
     if request.method == 'POST':
 
         schedules_table = db.table('Schedules')
+        user = Query()
 
         week = request.form.get('week')
-        shifts = []
-        for i in range(0,21):
-            shifts[i] = []
-    # TODO: figure out what are the names of each element.
+
+        shifts = [json.loads(request.form.get(f'shift-{i}')) for i in range(0,3)]
+        # TODO: change to range(0,21)
+
+        print(shifts)
+
+        inserted = schedules_table.upsert({'week':week, 'shifts': shifts}, (user.week == week))
+
+        return ({'submitted data': inserted})
 
 @app.route('/allData')
 def get_all_data():
@@ -77,6 +83,21 @@ def get_schedules():
         schedules_table = db.table('Schedules')
 
         return ({'schedules' : schedules_table.all()})
+
+@app.route('/weekschedule', methods=['GET', 'POST'])
+def get_week_schedule():
+    
+    '''
+    Return the weekly schedule.
+    '''
+
+    if request.method == 'GET':
+        week = request.values['week']
+
+        schedules_table = db.table('Schedules')
+        user = Query()
+
+        return ({'Weekly schedule': schedules_table.search(user.week == week)})
 
 @app.route('/empconstraints', methods=['GET', 'POST'])
 def get_emp_constraints():

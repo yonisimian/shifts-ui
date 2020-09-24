@@ -6,7 +6,7 @@ import NoSubmitAlert from './NoSubmitAlert'
 import ChooseWeek from '../../general/chooseWeek.js'
 import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import { Container, Row, Col} from 'react-bootstrap'
+import { Container, Row, Col, Form, FormGroup } from 'react-bootstrap'
 import { getWeek } from '../../../scripts'
 import { myConfig } from '../../../config'
 
@@ -37,6 +37,13 @@ function App() {
     const handleSubmit = (e) => {
         e.preventDefault()
         let data = new FormData(form.current)
+        fetch('/submitschedule', {method: 'POST', body: data})
+        .then(res => res.json())
+        .then(data => {
+        })
+        .catch(error => {
+            //alert('משהו נדפק, המשמרות לא הוגשו בהצלחה :(')
+        })
     }
 
     return (
@@ -46,18 +53,34 @@ function App() {
             <NoSubmitAlert showAlert={showAlert2} />
             <Jumbotron>
                 <Container fluid>
-                    <form ref={form} onSubmit={handleSubmit} method="post">
-                        <Row>
-                            <Col sm="2" />
-                            <Col sm="4"><h3 onClick={() => alert(showAlert2)}>הכנת הסידור לשבוע: </h3></Col>        
-                            <Col sm="5"><ChooseWeek defaultWeek={1} onChange={handleChange}/></Col>
-                            <Col sm="1" />
-                        </Row>
-                        <Row>
-                            <Col sm="12"><Table week={week} setShowAlert2={(e) => setShowAlert2(e)} /></Col>
-                        </Row>
-                        <Button variant="primary" type="submit">שגר!</Button>
-                    </form>
+                    <Form ref={form} onSubmit={handleSubmit} method="post">
+                        <Form.Group>
+                            <Form.Row>
+                                <Col sm="2" />
+                                <Col sm="4"><h3 onClick={() => alert(showAlert2)}>הכנת הסידור לשבוע: </h3></Col>        
+                                <Col sm="5"><ChooseWeek defaultWeek={1} onChange={handleChange}/></Col>
+                                <Col sm="1" />
+                            </Form.Row>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Row>
+                                <Col sm="12"><Table week={week} setShowAlert2={(e) => setShowAlert2(e)} /></Col>
+                            </Form.Row>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Row>
+                                <Form.Label className="text-align-right">הערות: </Form.Label>
+                                <Form.Control as='textarea' name='comments' rows="3" />
+                            </Form.Row>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Row>
+                                <Col />
+                                    <Button variant="outline-primary" type="submit">שגר!</Button>
+                                <Col />
+                            </Form.Row>
+                        </Form.Group>
+                    </Form>
                 </Container>
             </Jumbotron>
             {consJumbo}

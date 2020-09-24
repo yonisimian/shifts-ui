@@ -1,20 +1,20 @@
 import React from 'react'
 import Row from './Table Row.js'
 import Table from 'react-bootstrap/Table'
-import Form from 'react-bootstrap/Form'
+import { Form } from 'react-bootstrap'
 
 function App(props) {
   const shifts = ["בוקר", "ערב", "לילה"]
   const table_rows = shifts.map((shift) => 
-    <Row header={shift} blocks={props.blocks}/>
+    <Row header={shift} shifts={props.shifts}/>
   )
   const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
   const day_titles = days.map((day) => 
     <th>{day}</th>
   )
   return (
-    <Form.Group>
-      <h4>טבלת החסימות של {props.name} לשבוע {props.week}</h4>
+    <div>
+      <h4>טבלת המשמרות לשבוע {props.week}</h4>
       <Table striped bordered hover>
         <tr>
           <th></th>
@@ -25,7 +25,7 @@ function App(props) {
 
       </Table>
       <Form.Control as="textarea" disabled>{props.comments}</Form.Control>
-    </Form.Group>
+    </div>
   );
 }
 
