@@ -13,7 +13,7 @@ function App(props) {
     <th>{day}</th>
   )
   return (
-    <div>
+    <div className="ready-table">
       <h4>טבלת המשמרות לשבוע {props.week}</h4>
       <Table striped bordered hover>
         <tr>
@@ -24,7 +24,10 @@ function App(props) {
         {table_rows}
 
       </Table>
-      <Form.Control as="textarea" disabled>{props.comments}</Form.Control>
+      <Form.Control
+        as="textarea"
+        className="unresizeable"
+        disabled>{props.comments}</Form.Control>
     </div>
   );
 }

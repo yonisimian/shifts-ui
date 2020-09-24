@@ -46,11 +46,11 @@ function App(props) {
                 </Row>
                 <br></br>
                 <Row>
-                    {items != null ? <BlocksTable
+                    {items && <BlocksTable
                                         name={items.name}
                                         week={items.week}
                                         blocks={items.shifts}
-                                        comments={items.comments}/> : ''}
+                                        comments={items.comments}/>}
                 </Row>
             </Container>
         </Jumbotron>

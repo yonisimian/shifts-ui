@@ -81,6 +81,15 @@ u {
   text-align: center;
 }
 
+.unresizeable {
+  resize: none;
+}
+
+.ready-table {
+  margin: 10px auto 10px auto;
+  padding: 10px;
+  border-style: groove;
+}
 
 .submission-form {
   max-width: 800px;
