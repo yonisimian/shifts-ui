@@ -1,78 +1,44 @@
-import React, {useState, useRef, useCallback} from 'react'
-import {Form, Button, Row, Col} from 'react-bootstrap'
+import React, {useState, useEffect, useRef} from 'react'
+import {Button, Form} from 'react-bootstrap'
 
 function App(props) {
-    const form = useRef(null)
-    const functionA = (e) => {
-        e.preventDefault()
-        /*let data = new FormData(form.current)
-        fetch('/addemployee', {method: 'POST', body: data})
-        .then(res => res.json())
-        .then(data => {
-            alert('wi')
-        })
-        .catch(error => alert(error))*/
-        alert('submit')
+    const {data, lineNumber, isEditable, removeSelf} = props
+    const id = lineNumber - 1
+    const handleChange = (e) => {
+        e.target.className = e.target.value != e.target.defaultValue
+                        ? "form-control text-danger" : "form-control"
     }
 
     return (
-        <div>
-            <Form onSubmit={functionA} ref={form}>
-                <Form.Group as={Row}>
-                    <Form.Label column sm={3}>שם מלא:</Form.Label>
-                    <Col sm={8}>
-                        <Form.Control
-                            type="text"
-                            name='full_name'
-                            value={props.bakar != null ? props.bakar.full_name : undefined}
-                            placeholder="דוגמא: אחשוורוש המלך"
-                            required
-                        />
-                    </Col>
-                </Form.Group>
-                <Form.Group as={Row}>
-                    <Form.Label column sm={3}>שם מקוצר:</Form.Label>
-                    <Col sm={8}>
-                        <Form.Control
-                            type="text"
-                            name='short_name'
-                            value={props.bakar != null ? props.bakar.short_name : undefined}
-                            placeholder="דוגמא: אחשווי"
-                            required
-                        />
-                    </Col>
-                </Form.Group>
-                {props.bakar != null ?
-                    <>
-                        <Form.Group as={Row}>
-                            <Col sm={{ span: 10, offset: 2 }}>
-                                <Button variant="outline-success">שמור נתונים</Button>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row}>
-                            <Col sm={{ span: 10, offset: 2 }}>
-                                <Button variant="outline-danger">מחק בקר</Button>
-                            </Col>
-                        </Form.Group>
-                    </>
-                    :
-                    <>
-                        <Form.Group as={Row}>
-                            <Col sm={{ span: 10, offset: 2 }}>
-                                <Button
-                                    variant="outline-primary"
-                                    type='submit'>הוסף בקר</Button>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row}>
-                            <Col sm={{ span: 10, offset: 2 }}>
-                                <Button variant="outline-secondary">נקה טופס</Button>
-                            </Col>
-                        </Form.Group>
-                    </> 
-                }
-            </Form>
-        </div>
+        <tr>
+            <td>{lineNumber}</td>
+            <td>
+                <Form.Control
+                    name={"full_name-"+id}
+                    placeholder="לדוגמא: אחשוורוש המלך"
+                    defaultValue={data.full_name}
+                    disabled={!isEditable}
+                    onChange={handleChange} />
+                <h3>{data.full_name}</h3>
+            </td>
+            <td>
+                <Form.Control
+                    name={"short_name-"+id}
+                    placeholder="לדוגמא: אחשווי"
+                    defaultValue={data.short_name}
+                    disabled={!isEditable}
+                    onChange={handleChange} />
+            </td>
+            <td>
+                <Form.Control
+                    type="color"
+                    name={"color-"+id}
+                    style={{padding: "4px"}}
+                    defaultValue={data.color}
+                    disabled={!isEditable}/>
+            </td>
+            {isEditable && <td><Button variant="outline-danger" onClick={removeSelf}>הסר</Button></td>}
+        </tr>
     );
 }
 

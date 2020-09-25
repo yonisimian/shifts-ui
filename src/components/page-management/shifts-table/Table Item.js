@@ -9,7 +9,7 @@ function App(props) {
   return (
     <td className="shifts-td">
       { props.shifts[id] && props.shifts[id].map(shift => 
-        <p className="bakar">{shift['label']}</p>
+        <p className="shifts-bakar" style={{backgroundColor: "yellow"}}>{shift['label']}</p>
       )}
     </td>
   );

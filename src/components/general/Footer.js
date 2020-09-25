@@ -12,7 +12,7 @@ function App() {
           <ul style={{textAlign: "right"}}>
             <li><NavLink to={url.submissionPage}>הגשת משמרות</NavLink></li>
             <li><NavLink to={url.managementPage}>ניהול משמרות</NavLink></li>
-            <li><NavLink to={url.adminPage}>אדמיניסטרציופוליניזיה</NavLink></li>
+            <li><NavLink to={url.adminPage}>סתם ניהול</NavLink></li>
           </ul>
         </Nav>
       </div>

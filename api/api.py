@@ -33,7 +33,7 @@ def submit_constraints():
 
         return ({'submitted data': inserted})
 
-@app.route('/submitschedule', methods=['POST'])
+@app.route('/submitschedule', methods=['GET', 'POST'])
 def submit_schedule():
 
     '''
@@ -46,31 +46,71 @@ def submit_schedule():
         user = Query()
 
         week = request.form.get('week')
-
+        comments = request.form.get('comments')
         shifts = [json.loads(request.form.get(f'shift-{i}')) for i in range(0,21)]
-        # TODO: change to range(0,21)
 
-        print(shifts)
+        inserted = schedules_table.upsert({'week':week, 'shifts': shifts, 'comments': comments}, (user.week == week))
 
-        schedules_table.upsert({'week':week, 'shifts': shifts}, (user.week == week))
+        return ({'submitted data': inserted})
 
-        return 'success'
-
-@app.route('/allData')
-def get_all_data():
+@app.route('/submitemployees', methods=['GET', 'POST'])
+def submit_employees():
 
     '''
-    Returns all of the constraints and schedules.
+    Handles employee submission to the DB.    
     '''
 
-    cons_table = db.table('Constraints')
-    schedules_table = db.table('Schedules')
-    # TODO: return the data ordered by date (newest to oldest)
+    if request.method == 'POST':
+        num_of_emps = int(request.values['num_of_emps'])
+        print(num_of_emps)
+        if num_of_emps == 0:
+            return ''
+
+        full_names = [request.form.get(f'full_name-{i}')  for i in range(0,num_of_emps)]
+        short_names = [request.form.get(f'short_name-{i}') for i in range(0,num_of_emps)]
+        colors = [request.form.get(f'color-{i}')      for i in range(0,num_of_emps)]
+
+        for i in range(0, num_of_emps):
+            print(f'full name: {full_names[i]}, short name: {short_names[i]}, color: {colors[i]}')
+
+        emps_table = db.table('Employees')
+        # emps_table.truncate()
+
+        inserted = 0
+        for i in range(0, num_of_emps):
+            # TODO: make "emp" object that contains full_names[i], short_name[i], colors[i]
+            # emps_table.insert(emp)
+            inserted += 1
+
+        return str(inserted)
+
+@app.route('/getemployees', methods=['GET', 'POST'])
+def get_emps():
+
+    '''
+    Returns all of the employees from the DB.
+    '''
+
+    if request.method == 'GET':
+        emps_table = db.table('Employees')
+        
+        return ({'all_emps': emps_table.all()})
+
+# @app.route('/allData')
+# def get_all_data():
+
+#     '''
+#     Returns all of the constraints and schedules.
+#     '''
+
+#     cons_table = db.table('Constraints')
+#     schedules_table = db.table('Schedules')
+#     # TODO: return the data ordered by date (newest to oldest)
     
-    return ({'all_data' :
-                {'Constraints' : cons_table.all(),
-                 'Schedules' : schedules_table.all()}
-            })
+#     return ({'all_data' :
+#                 {'Constraints' : cons_table.all(),
+#                  'Schedules' : schedules_table.all()}
+#             })
 
 @app.route('/schedules', methods=['GET'])
 def get_schedules():
@@ -84,20 +124,20 @@ def get_schedules():
 
         return ({'schedules' : schedules_table.all()})
 
-@app.route('/weekschedule', methods=['GET', 'POST'])
-def get_week_schedule():
+# @app.route('/weekschedule', methods=['GET', 'POST'])
+# def get_week_schedule():
     
-    '''
-    Return the weekly schedule.
-    '''
+#     '''
+#     Return the weekly schedule.
+#     '''
 
-    if request.method == 'GET':
-        week = request.values['week']
+#     if request.method == 'GET':
+#         week = request.values['week']
 
-        schedules_table = db.table('Schedules')
-        user = Query()
+#         schedules_table = db.table('Schedules')
+#         user = Query()
 
-        return ({'Weekly schedule': schedules_table.search(user.week == week)})
+#         return ({'Weekly schedule': schedules_table.search(user.week == week)})
 
 @app.route('/empconstraints', methods=['GET', 'POST'])
 def get_emp_constraints():
@@ -131,71 +171,60 @@ def get_week_constraints():
         
         return ({'week_constraints': cons_table.search(user.week == week)})
 
-@app.route('/empweekconstraints', methods=['GET', 'POST'])
-def get_emp_week_constraints():
+# @app.route('/empweekconstraints', methods=['GET', 'POST'])
+# def get_emp_week_constraints():
 
-    '''
-    Returns all of the constraints of a certain employee, at a certain week.
-    '''
+#     '''
+#     Returns all of the constraints of a certain employee, at a certain week.
+#     '''
 
-    if request.method == 'GET':
-        name = request.values['name']
-        week = request.values['week']
+#     if request.method == 'GET':
+#         name = request.values['name']
+#         week = request.values['week']
 
-        cons_table = db.table('Constraints')
-        user = Query()
+#         cons_table = db.table('Constraints')
+#         user = Query()
 
-        return (cons_table.search((user.name == name) & (user.week == week))[0])
+#         return (cons_table.search((user.name == name) & (user.week == week))[0])
 
-@app.route('/addemployee', methods=['GET', 'POST'])
-def add_employee():
+# @app.route('/addemployee', methods=['GET', 'POST'])
+# def add_employee():
 
-    '''
-    Adds a new employee to the DB.
-    '''
+#     '''
+#     Adds a new employee to the DB.
+#     '''
 
-    if request.method == 'POST':
-        full_name = request.form.get('full_name')
-        short_name = request.form.get('short_name')
+#     if request.method == 'POST':
+#         full_name = request.form.get('full_name')
+#         short_name = request.form.get('short_name')
+#         color = request.form.get('color')
 
-        emps_table = db.table('Employees')
-        user = Query()
+#         emps_table = db.table('Employees')
+#         user = Query()
 
-        inserted = emps_table.upsert({'full_name': full_name, 'short_name': short_name},
-                                     ((user.full_name == full_name) & (user.short_name == short_name)))
+#         inserted = emps_table.upsert({'full_name': full_name, 'short_name': short_name, 'color': color},
+#                                      ((user.full_name == full_name) & (user.short_name == short_name)))
 
-        return (inserted)
+#         return (inserted)
 
-@app.route('/removeemployee', methods=['GET', 'POST'])
-def remove_employee():
+# @app.route('/removeemployee', methods=['GET', 'POST'])
+# def remove_employee():
 
-    '''
-    Removes an employee from the DB.
-    '''
+#     '''
+#     Removes an employee from the DB.
+#     '''
 
-    if request.method == 'POST':
-        data = request.get_json()
+#     if request.method == 'POST':
+#         data = request.get_json()
 
-        full_name = data['full_name']
+#         full_name = data['full_name']
 
-        emps_table = db.table('Employees')
-        user = Query()
+#         emps_table = db.table('Employees')
+#         user = Query()
 
-        removed = emps_table.remove(user.full_name == full_name)
+#         removed = emps_table.remove(user.full_name == full_name)
 
-        return (removed)
-
-@app.route('/getemployees', methods=['GET', 'POST'])
-def get_emps():
-
-    '''
-    Returns all of the employees from the DB.
-    '''
-
-    if request.method == 'GET':
-        emps_table = db.table('Employees')
-        #return (emps_table.all()[0])
-        return ({'all_emps': emps_table.all()})
+#         return (removed)
 
 if __name__ == '__main__':
     app.run(debug=True)
