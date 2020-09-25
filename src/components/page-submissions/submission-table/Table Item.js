@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormLabel } from 'react-bootstrap';
 import FormCheck from 'react-bootstrap/FormCheck'
 
 function App(props) {
@@ -8,7 +9,8 @@ function App(props) {
 
   return (
     <td>
-      <FormCheck name={"shift-"+id}/>
+      <input type="checkbox" name={"shift-"+id} id={"shift-"+id} className="check-box" />
+      <label for={"shift-"+id}></label>
     </td>
   );
 }

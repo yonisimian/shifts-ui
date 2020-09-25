@@ -10,7 +10,7 @@ function App(props) {
 
   return (
     <td>
-      <h5 className="red">{x}</h5>
+      <h5 style={{color: "red"}}>{x}</h5>
     </td>
   );
 }

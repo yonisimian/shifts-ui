@@ -3,16 +3,9 @@ html, body {
   margin: 0;
 }
 
-.App {
-  text-align: center;
-  flex: 1 0 auto;
-  padding: 10px
-}
-
-.check-box {
-  top: 1.2rem;
-  width: 1.85rem;
-  height: 1.85rem;
+header {
+  margin: 0 10px 25px 10px;
+  box-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px darkred;
 }
 
 footer {
@@ -20,57 +13,65 @@ footer {
   margin-top: 20%;
 }
 
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
+.App {
+  text-align: center;
+  flex: 1 0 auto;
 }
 
-table {
-  margin: 10px;
+.check-box {
+  display: none;
 }
 
-.small-font {
-  font-size: small;
+.check-box + label {
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+  padding: 9px;
+  margin: auto;
+	border-radius: 4px;
+	display: inline-block;
+	position: relative;
 }
 
-.tiny-font {
-  font-size: x-small;
+.check-box + label:active, .check-box:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
 }
 
-.min-size-900 {
-  min-width: 600px;
+.check-box:checked + label {
+	background-color: #eee;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #99a1a7;
 }
 
-u {
-  color: blue;
-  cursor: pointer;
-}
-
-.black {
-  background-color: black;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.red {
+.check-box:checked + label:after {
+	content: '\2715';
+	font-size: 14px;
+	position: absolute;
+	top: 0px;
+	left: 3px;
   color: red;
-}
-
-.red-border {
-  border: 2px solid red;
-  border-radius: 4px;
-}
-
-#tep td {
-  padding: 0;
 }
 
 .select-bakarim {
   text-align: center;
   min-width: 150px;
   max-width: 250px;
+}
+
+/* tr, col {
+  border: 2px solid #555;
+} */
+
+.shifts-td {
+  padding: 5px 0 5px 0 !important;
+  border: 0 !important;
+}
+
+p.bakar {
+  margin: 0;
+  padding: 4px;
+  border: 1px groove;
 }
 
 .text-align-right {
@@ -88,18 +89,9 @@ u {
 .ready-table {
   margin: 10px auto 10px auto;
   padding: 10px;
-  border-style: groove;
+  border: groove;
 }
 
 .submission-form {
   max-width: 800px;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

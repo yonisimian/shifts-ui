@@ -7,9 +7,9 @@ function App(props) {
   else if (props.header === 'לילה') id += 2
 
   return (
-    <td>
+    <td className="shifts-td">
       { props.shifts[id] && props.shifts[id].map(shift => 
-        <h5>{shift['label']}</h5>
+        <p className="bakar">{shift['label']}</p>
       )}
     </td>
   );

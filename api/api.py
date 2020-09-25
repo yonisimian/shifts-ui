@@ -47,14 +47,14 @@ def submit_schedule():
 
         week = request.form.get('week')
 
-        shifts = [json.loads(request.form.get(f'shift-{i}')) for i in range(0,3)]
+        shifts = [json.loads(request.form.get(f'shift-{i}')) for i in range(0,21)]
         # TODO: change to range(0,21)
 
         print(shifts)
 
-        inserted = schedules_table.upsert({'week':week, 'shifts': shifts}, (user.week == week))
+        schedules_table.upsert({'week':week, 'shifts': shifts}, (user.week == week))
 
-        return ({'submitted data': inserted})
+        return 'success'
 
 @app.route('/allData')
 def get_all_data():

@@ -9,7 +9,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
 function App() {
-  const [key, setKey] = useState('4');
+  const [key, setKey] = useState('1');
 
   return (
     <div>

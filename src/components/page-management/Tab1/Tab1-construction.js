@@ -38,11 +38,12 @@ function App() {
         e.preventDefault()
         let data = new FormData(form.current)
         fetch('/submitschedule', {method: 'POST', body: data})
-        .then(res => res.json())
+        .then(res => res)
         .then(data => {
+            alert('אחלההה')
         })
         .catch(error => {
-            //alert('משהו נדפק, המשמרות לא הוגשו בהצלחה :(')
+            alert('משהו נדפק, המשמרות לא הוגשו בהצלחה :(')
         })
     }
 

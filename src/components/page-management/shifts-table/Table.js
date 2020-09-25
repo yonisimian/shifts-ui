@@ -9,7 +9,7 @@ function App(props) {
     <Row header={shift} shifts={props.shifts}/>
   )
   const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
-  const day_titles = days.map((day) => 
+  const day_titles = days.map(day => 
     <th>{day}</th>
   )
   return (

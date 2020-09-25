@@ -12,7 +12,7 @@ function App(props) {
         showAlert ? 
             props.bakarim.length > 0 ?
             <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-                <Alert.Heading>הבקרים הבאים עדיין לא הגישו משמרות לשבוע {props.week}:</Alert.Heading>
+                <Alert.Heading>הבקרים הבאים טרם הגישו משמרות לשבוע {props.week}:</Alert.Heading>
                 <p>
                     <ul className='text-align-right' >
                         {props.bakarim}

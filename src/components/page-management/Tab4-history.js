@@ -32,12 +32,14 @@ function App() {
                     //     <Pagination.First />
                     //     <Pagination.Prev />
                         shifts.map((shift, index) => 
-                            <Row>
-                                <ShiftsTable
-                                    week={shift.week}
-                                    shifts={shift.shifts}
-                                    comments={shift.comments}/>
-                            </Row>
+                            <>
+                                <Row>
+                                    <ShiftsTable
+                                        week={shift.week}
+                                        shifts={shift.shifts}
+                                        comments={shift.comments}/>
+                                </Row>
+                            </>
                         )
                     //     <Pagination.Next />
                     //     <Pagination.Last />
