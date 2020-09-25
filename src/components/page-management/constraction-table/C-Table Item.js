@@ -34,7 +34,7 @@ function App(props) {
               autoComplete="off"
               style={{ opacity: 0, height: 0 }}
               value={JSON.stringify(myValue)}
-              required={isRequired}
+              //required={isRequired}
             />
           }
       </>

@@ -3,10 +3,9 @@ import Table from '../constraction-table/Construction Table'
 import ShowConstraintOf from './ShowContraintOf'
 import NoShiftsAlert from './NoShiftsAlert'
 import NoSubmitAlert from './NoSubmitAlert'
+import SuccessModal from './Modal'
 import ChooseWeek from '../../general/chooseWeek.js'
-import Button from 'react-bootstrap/Button'
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import { Container, Row, Col, Form, FormGroup } from 'react-bootstrap'
+import { Container, Col, Form, Jumbotron, Button } from 'react-bootstrap'
 import { getWeek } from '../../../scripts'
 import { myConfig } from '../../../config'
 
@@ -34,13 +33,19 @@ function App() {
         .catch(error => alert("tab1 error: " + error))
     }, [week])
 
+    const [isModalShown, setShowModal] = useState(false)
+    const hideModal = () => {
+        setShowModal(false)
+        window.location.reload()
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         let data = new FormData(form.current)
         fetch('/submitschedule', {method: 'POST', body: data})
         .then(res => res)
         .then(data => {
-            alert('אחלההה')
+            setShowModal(true)
         })
         .catch(error => {
             alert('משהו נדפק, המשמרות לא הוגשו בהצלחה :(')
@@ -49,6 +54,7 @@ function App() {
 
     return (
         <main>
+            <SuccessModal show={isModalShown} handleClose={hideModal} />
             <NoShiftsAlert bakarim={remain_bakarim} week={week}/>
             <NoSubmitAlert showAlert={showAlert2} />
             <Jumbotron>

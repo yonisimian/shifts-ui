@@ -10,7 +10,6 @@ import Modal from './Modal'
 
 function App() {
     const [isModalShown, setShowModal] = useState(false)
-    const showModal = () => setShowModal(true)
     const hideModal = () => {
         setShowModal(false)
         window.location.reload()
