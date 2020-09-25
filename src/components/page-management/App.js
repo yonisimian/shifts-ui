@@ -16,7 +16,7 @@ function App() {
       <Header title="טופס ניהול משמרות" />
 
       <Tabs
-        id="controlled-tab-example"
+        style={{margin: "auto auto 10px auto", maxWidth: "800px"}}
         defaultActiveKey={key}
         activeKey={key}
         onSelect={(k) => setKey(k)}

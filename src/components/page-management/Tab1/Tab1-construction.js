@@ -48,8 +48,7 @@ function App() {
     }
 
     return (
-        <main className="min-size-900">
-            <br></br>
+        <main>
             <NoShiftsAlert bakarim={remain_bakarim} week={week}/>
             <NoSubmitAlert showAlert={showAlert2} />
             <Jumbotron>
@@ -70,7 +69,7 @@ function App() {
                         </Form.Group>
                         <Form.Group>
                             <Form.Row>
-                                <Form.Label className="text-align-right">הערות: </Form.Label>
+                                <Form.Label>הערות: </Form.Label>
                                 <Form.Control as='textarea' name='comments' rows="3" />
                             </Form.Row>
                         </Form.Group>

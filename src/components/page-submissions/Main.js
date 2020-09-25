@@ -32,7 +32,7 @@ function App() {
     }
 
     return (
-        <main className="submission-form">
+        <main>
             <Modal show={isModalShown} handleClose={hideModal} />
             <Jumbotron>
                 <Form ref={form} onSubmit={handleSubmit} method='POST'>
@@ -47,7 +47,7 @@ function App() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Row>
-                            <Form.Label className="text-align-right">הערות: </Form.Label>
+                            <Form.Label>הערות: </Form.Label>
                             <Form.Control as="textarea" name='comments' rows="4" />
                         </Form.Row>
                     </Form.Group>
