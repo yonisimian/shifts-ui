@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef } from 'react'
-import Table from '../constraction-table/Construction Table'
+import Table from '../constraction-table/Table'
 import ShowConstraintOf from './ShowContraintOf'
 import NoShiftsAlert from './Alerts/Alert-NoShifts'
 import NoSubmitAlert from './Alerts/Alert-NoSubmit'
@@ -34,7 +34,7 @@ function App() {
         .catch(error => alert("tab1 error: " + error))
     }, [week])
 
-    const [_88count, set88Count] = useState("1-")
+    const [_88count, set88Count] = useState(0)
 
     const [isModalShown, setShowModal] = useState(false)
     const hideModal = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Item from './C-Table Item';
+import Item from './Table Item';
 
 function App(props) {
   const getID = (i) => {

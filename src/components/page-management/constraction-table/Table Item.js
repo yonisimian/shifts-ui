@@ -25,7 +25,7 @@ function App(props) {
           value={myValue}
           options={bakarim_options2}
           onChange={value => {
-            //props.handleChange(value, props.id)
+            props.handleChange(value, props.id)
             setIsRequired(value == null || value.length === 0)
             setMyValue(value)
           }}

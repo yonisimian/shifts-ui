@@ -39,6 +39,7 @@ function App() {
                                         shifts={shift.shifts}
                                         comments={shift.comments}/>
                                 </Row>
+                                <hr/>
                             </>
                         )
                     //     <Pagination.Next />

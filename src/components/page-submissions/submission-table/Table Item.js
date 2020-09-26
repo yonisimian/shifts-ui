@@ -1,6 +1,5 @@
 import React from 'react';
-import { FormLabel } from 'react-bootstrap';
-import FormCheck from 'react-bootstrap/FormCheck'
+import './checkbox.css'
 
 function App(props) {
   let id = props.id

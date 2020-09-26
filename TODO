@@ -1,6 +1,6 @@
 -----------Bakarim Stuff----------
 -Fix the admin page bag
--Import bakarim from the DB
+-Import bakarim from the DB (with short name for the schedules)
 -Colorize shifts-tables according to DB's colors
 
 -----------Tab1 Stuff-------------
@@ -13,7 +13,7 @@
 -Align the table of Tab1
 -Create Tab2 (calculate specials)
 -Pagination for Tab4 and Tab3 (only per bakar in Tab3)
--Make shifts-count mini table near every shifts-table in Tab4
+-Make shifts-count and 8-8 mini tables near every shifts-table in Tab4
 
 ----------To Production-----------
 -Make construction table item required

@@ -2,10 +2,11 @@ import React, {useState, useEffect, useRef} from 'react'
 import {Jumbotron, Container, Row, Col, Table, Button, Form} from 'react-bootstrap'
 import _ from 'lodash'
 import Bakar from './Bakar'
+import { render } from '@testing-library/react'
 
 function App() {
     const form = useRef()
-    const [bakarim, setBakarim] = useState()
+    const [bakarim, setBakarim] = useState([])
     const [original, setOriginal] = useState()
     const [isEditable, setisEditable] = useState(false)
 
@@ -41,7 +42,9 @@ function App() {
     }
 
     const removeBakar = (id) => {
-        setBakarim(bakarim.filter((val, key) => key !== id))
+        alert("id: " + id + ", bakar: " + JSON.stringify(bakarim[id]))
+        let newBakarim = bakarim.filter((val, key) => key !== id)
+        setBakarim(newBakarim)
     }
 
     return (
@@ -50,7 +53,7 @@ function App() {
                 <Container fluid>
                     <Form ref={form} onSubmit={saveChanges}>
                         <Row>
-                            <Col md="12"><h3>רשימת בקרים</h3></Col>
+                            <Col md="12"><h3 onClick={() => alert(JSON.stringify(bakarim))}>רשימת בקרים</h3></Col>
                         </Row>
                         <Row>
                             {!isEditable ?
@@ -75,7 +78,7 @@ function App() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {(bakarim || []).map((bakar, index) => (
+                                    {bakarim.map((bakar, index) => (
                                         <Bakar
                                             data={bakar}
                                             lineNumber={index+1}
@@ -88,6 +91,7 @@ function App() {
                                             <td><Button variant="outline-primary" onClick={addBakar}>הוסף בקר חדש</Button></td>
                                             <td />
                                             {bakarim.length > 0 && <td />}
+                                            <td />
                                         </tr>
                                     }
                                 </tbody>

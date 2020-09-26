@@ -68,21 +68,20 @@ def submit_employees():
 
         full_names = [request.form.get(f'full_name-{i}')  for i in range(0,num_of_emps)]
         short_names = [request.form.get(f'short_name-{i}') for i in range(0,num_of_emps)]
-        colors = [request.form.get(f'color-{i}')      for i in range(0,num_of_emps)]
+        colors = [request.form.get(f'color-{i}') for i in range(0,num_of_emps)]
 
-        for i in range(0, num_of_emps):
-            print(f'full name: {full_names[i]}, short name: {short_names[i]}, color: {colors[i]}')
+        # for i in range(0, num_of_emps):
+        #     print(f'full name: {full_names[i]}, short name: {short_names[i]}, color: {colors[i]}')
 
         emps_table = db.table('Employees')
-        # emps_table.truncate()
+        emps_table.truncate()
 
         inserted = 0
         for i in range(0, num_of_emps):
-            # TODO: make "emp" object that contains full_names[i], short_name[i], colors[i]
-            # emps_table.insert(emp)
+            emps_table.insert({'full_name': full_names[i], 'short_name': short_names[i], 'color': colors[i]})
             inserted += 1
 
-        return str(inserted)
+        return f'{inserted}'
 
 @app.route('/getemployees', methods=['GET', 'POST'])
 def get_emps():
@@ -124,20 +123,20 @@ def get_schedules():
 
         return ({'schedules' : schedules_table.all()})
 
-# @app.route('/weekschedule', methods=['GET', 'POST'])
-# def get_week_schedule():
+@app.route('/weekschedule', methods=['GET', 'POST'])
+def get_week_schedule():
     
-#     '''
-#     Return the weekly schedule.
-#     '''
+    '''
+    Return the weekly schedule.
+    '''
 
-#     if request.method == 'GET':
-#         week = request.values['week']
+    if request.method == 'GET':
+        week = request.values['week']
 
-#         schedules_table = db.table('Schedules')
-#         user = Query()
+        schedules_table = db.table('Schedules')
+        user = Query()
 
-#         return ({'Weekly schedule': schedules_table.search(user.week == week)})
+        return ({'Weekly schedule': schedules_table.search(user.week == week)})
 
 @app.route('/empconstraints', methods=['GET', 'POST'])
 def get_emp_constraints():
