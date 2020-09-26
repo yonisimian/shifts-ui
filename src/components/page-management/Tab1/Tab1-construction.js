@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useRef } from 'react'
 import Table from '../constraction-table/Construction Table'
 import ShowConstraintOf from './ShowContraintOf'
-import NoShiftsAlert from './NoShiftsAlert'
-import NoSubmitAlert from './NoSubmitAlert'
+import NoShiftsAlert from './Alerts/Alert-NoShifts'
+import NoSubmitAlert from './Alerts/Alert-NoSubmit'
+import _88Alert from './Alerts/Alert-8-8s'
 import SuccessModal from './Modal'
 import ChooseWeek from '../../general/chooseWeek.js'
 import { Container, Col, Form, Jumbotron, Button } from 'react-bootstrap'
@@ -33,6 +34,8 @@ function App() {
         .catch(error => alert("tab1 error: " + error))
     }, [week])
 
+    const [_88count, set88Count] = useState("1-")
+
     const [isModalShown, setShowModal] = useState(false)
     const hideModal = () => {
         setShowModal(false)
@@ -57,15 +60,16 @@ function App() {
             <SuccessModal show={isModalShown} handleClose={hideModal} />
             <NoShiftsAlert bakarim={remain_bakarim} week={week}/>
             <NoSubmitAlert showAlert={showAlert2} />
+            <_88Alert count={_88count} />
             <Jumbotron>
                 <Container fluid>
                     <Form ref={form} onSubmit={handleSubmit} method="post">
                         <Form.Group>
                             <Form.Row>
-                                <Col sm="2" />
-                                <Col sm="4"><h3 onClick={() => alert(showAlert2)}>הכנת הסידור לשבוע: </h3></Col>        
+                                <Col />
+                                <Col sm="5"><h3>הכנת הסידור לשבוע: </h3></Col>        
                                 <Col sm="5"><ChooseWeek defaultWeek={1} onChange={handleChange}/></Col>
-                                <Col sm="1" />
+                                <Col />
                             </Form.Row>
                         </Form.Group>
                         <Form.Group>

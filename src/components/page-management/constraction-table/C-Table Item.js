@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
+import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 
 function App(props) {
@@ -10,7 +9,11 @@ function App(props) {
   const temp = bakarim.length == 1 ? { value: bakarim[0], label: bakarim[0] } : undefined
 
   const [isRequired, setIsRequired] = useState(true)
-  const [myValue, setMyValue] = useState()
+  const [myValue, setMyValue] = useState(/*temp*/)
+  
+  useEffect(() => {
+    setMyValue(null)
+  }, [props.week])
 
   return (
     <td>
@@ -19,9 +22,10 @@ function App(props) {
           className="select-bakarim"
           // TODO: add colors via styles
           placeholder={'-'+bakarim.length+'-'}
-          //value={temp}
+          value={myValue}
           options={bakarim_options2}
           onChange={value => {
+            //props.handleChange(value, props.id)
             setIsRequired(value == null || value.length === 0)
             setMyValue(value)
           }}
@@ -32,7 +36,7 @@ function App(props) {
               name={"shift-"+props.id}
               tabIndex={-1}
               autoComplete="off"
-              style={{ opacity: 0, height: 0 }}
+              style={{ display: "none", opacity: 0, height: 0 }}
               value={JSON.stringify(myValue)}
               //required={isRequired}
             />

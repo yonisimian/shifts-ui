@@ -14,7 +14,7 @@ function App(props) {
             <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
                 <Alert.Heading>הבקרים הבאים טרם הגישו משמרות לשבוע {props.week}:</Alert.Heading>
                 <p>
-                    <ul className='text-align-right' >
+                    <ul style={{textAlign: "right"}} >
                         {props.bakarim}
                     </ul>
                 </p>

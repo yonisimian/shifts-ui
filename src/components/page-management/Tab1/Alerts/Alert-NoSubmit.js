@@ -12,11 +12,6 @@ function App(props) {
         showAlert &&
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
             <Alert.Heading>אבוי! משמרת אחת או יותר נחסמו ע"י כל הבקרים :(</Alert.Heading>
-            <p>
-                <ul className='text-align-right' >
-                    {props.bakarim}
-                </ul>
-            </p>
         </Alert>
     );
 }
