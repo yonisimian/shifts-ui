@@ -7,6 +7,7 @@
 -Calculate and show 8-8s in an alert
 -Remove bakar in construction table item after selecting him in near shifts
 -Make an "ignore constraints" button
+-Create a loading spinner
 
 -----------Other Stuff------------
 -Make a function to translate "2020-W40" to "27/09/20 - 04/10/20"

@@ -14,7 +14,7 @@ function App(props) {
                     id="week" 
                     name="week"
                     min="2020-W01" 
-                    defaultValue={getWeek(props.defaultWeek)} 
+                    defaultValue={props.week ? props.week : getWeek(props.defaultWeek)}
                     onChange={props.onChange}
                     required
                 />

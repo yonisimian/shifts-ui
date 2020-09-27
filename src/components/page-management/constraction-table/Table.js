@@ -59,28 +59,38 @@ function App(props) {
     setSuggestions(newSuggestions)
   }
 
-  useEffect(() => {
+  const updateTable = (ignore) => {
     curState = defaultUnavailable
     unavailable = defaultUnavailable
 
-    fetch("/weekconstraints?week="+props.week, {method: 'GET'})
-    .then(res => res.json())
-    .then((result) => {
-      let bakarimLists = Array.from(Array(21).keys())
-                     .map(i => bakarim
-                     .filter(bakar => result['week_constraints']
-                     .filter(v => v.name === bakar)[0].shifts[i]==null))
+    if (ignore)
+    {
+        constraints = defaultConstraints
+        setSuggestions(defaultConstraints)
+    }
+    else
+    {
+      try {
+        let bakarimLists = Array.from(Array(21).keys())
+          .map(i => bakarim
+          .filter(bakar => props.data
+          .filter(v => v.name === bakar)[0].shifts[i]==null))
         constraints = bakarimLists
         setSuggestions(bakarimLists)
         bakarimLists.map(list => list.length == 0 ? props.setShowAlert2(true) : void 0)
-    })
-    .catch(error => {
+      }
+      catch (error) {
         constraints = defaultConstraints
         unavailable = defaultUnavailable
         setSuggestions(defaultConstraints)
         //alert("construction table error: " + error)
-    })
-  }, [props.week])
+      }    
+    }
+  }
+
+  useEffect(() => {
+    updateTable(props.ignore)
+  }, [props.week, props.ignore])
 
   const shifts = ["בוקר", "ערב", "לילה"]
   const table_rows = shifts.map((shift) =>
