@@ -35,6 +35,7 @@ function App(props) {
                     id={"fullName"}
                     placeholder="לדוגמא: אחשוורוש המלך"
                     value={fullName}
+                    maxLength={24}
                     style={{backgroundColor: backGroundColor}}
                     disabled={!isEditable}
                     onChange={handleChange} />
@@ -45,6 +46,7 @@ function App(props) {
                     id={"shortName"}
                     placeholder="לדוגמא: אחשווי"
                     value={shortName}
+                    maxLength={8}
                     style={{backgroundColor: backGroundColor}}
                     disabled={!isEditable}
                     onChange={handleChange} />

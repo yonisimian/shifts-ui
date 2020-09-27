@@ -5,8 +5,11 @@ import {myConfig} from '../../../config'
 import _ from 'lodash'
 
 function App(props) {
-  const bakarimTEMP = myConfig.bakarim
-  const defaultConstraints = Array.from(Array(21).keys()).map(i => bakarimTEMP)
+  //const bakarimDB = props.bakarim == undefined ? [] : props.bakarim
+  const bakarim = myConfig.bakarim
+  //let bakarimShort = bakarimDB.map(value => value.full_name)
+  //const bakarimFull = bakarimDB.map(value => value.full_name)
+  const defaultConstraints = Array.from(Array(21).keys()).map(i => bakarim)
   const defaultUnavailable = Array.from(Array(21).keys()).map(i => [])
 
   let constraints = defaultConstraints
@@ -64,7 +67,7 @@ function App(props) {
     .then(res => res.json())
     .then((result) => {
       let bakarimLists = Array.from(Array(21).keys())
-                     .map(i => bakarimTEMP
+                     .map(i => bakarim
                      .filter(bakar => result['week_constraints']
                      .filter(v => v.name === bakar)[0].shifts[i]==null))
         constraints = bakarimLists

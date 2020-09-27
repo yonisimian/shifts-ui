@@ -10,7 +10,7 @@ import { Container, Col, Form, Jumbotron, Button } from 'react-bootstrap'
 import { getWeek } from '../../../scripts'
 import { myConfig } from '../../../config'
 
-function App() {
+function App(props) {
     const form = useRef(null)
     const [week, setWeek] = useState(getWeek(1))
     const [consJumbo, setConsJumbo] = useState(<ShowConstraintOf week={week} />)
@@ -74,7 +74,11 @@ function App() {
                         </Form.Group>
                         <Form.Group>
                             <Form.Row>
-                                <Col sm="12"><Table week={week} setShowAlert2={(e) => setShowAlert2(e)} /></Col>
+                                <Col sm="12"><Table
+                                                week={week}
+                                                bakarim={props.bakarim}
+                                                setShowAlert2={(e) => setShowAlert2(e)}
+                                                /></Col>
                             </Form.Row>
                         </Form.Group>
                         <Form.Group>
