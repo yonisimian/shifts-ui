@@ -8,7 +8,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 
 function App() {
-  const [key, setKey] = useState('3')
+  const [key, setKey] = useState('1')
   let bakarim
   useEffect(() => {
     fetch('/getemployees', {method: 'GET'})

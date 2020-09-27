@@ -22,7 +22,7 @@ function App() {
         })
         .catch(error => {
             setItems([])
-            alert("tab3 error: " + error)
+            alert("couln't import week's constraints from DB: " + error)
         })
     }
 
@@ -37,7 +37,7 @@ function App() {
         })
         .catch(error => {
             setItems([])
-            alert("tab3 error: " + error)
+            alert("couln't import employees' constraints from DB: " + error)
         })
     }
 
@@ -49,14 +49,11 @@ function App() {
     }, [])
 
     const handleChange = (e) => {
-        if (e.target.value === '1') {
-            setSecondSelect(1)
+        setSecondSelect(e.target.value)
+        e.target.value === '1' ?
             setItems([])
-        }
-        else {
-            setSecondSelect(0)
+        :
             handleChangeWeek(getWeek(1))
-        }
     }
 
     const [curPage, setCurPage] = useState(0)

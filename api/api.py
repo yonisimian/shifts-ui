@@ -163,7 +163,7 @@ def get_week_constraints():
 
     if request.method == 'GET':
 
-        week= request.values['week']
+        week = request.values['week']
         
         cons_table = db.table('Constraints')
         user = Query()

@@ -10,10 +10,9 @@
 
 -----------Other Stuff------------
 -Make a function to translate "2020-W40" to "27/09/20 - 04/10/20"
+-Make week input from sunday to saturday
 -Align the table of Tab1
 -Create Tab2 (calculate specials)
--Fix pagination for Tab4
--Add pagination for Tab3 (only per bakar)
 -Make shifts-count and 8-8 mini tables near every shifts-table in Tab4
 
 ----------To Production-----------

@@ -13,26 +13,39 @@ import { myConfig } from '../../../config'
 function App(props) {
     const form = useRef(null)
     const [week, setWeek] = useState(getWeek(1))
-    const [consJumbo, setConsJumbo] = useState(<ShowConstraintOf week={week} />)
-    const handleChange = (e) => {
-        setShowAlert2(false)
-        setWeek(e.target.value)
-        setConsJumbo(<ShowConstraintOf week={e.target.value} />)
-    }
-
     const [showAlert2, setShowAlert2] = useState(false)
+    const [empConstraints, setEmpConstraints] = useState({})
     const [remain_bakarim, setRB] = useState(myConfig.bakarim) // TODO: get Bakarim from the DB
     useEffect(() => {
         fetch("/weekconstraints?week="+week, {method: 'GET'})
         .then(res => res.json())
         .then((result) => {
-            let submitted = result['week_constraints'].map(val => val.name)
+            let data = result['week_constraints']
+            let submitted = data.map(val => val.name)
             // TODO: get Bakarim from the DB
             let remain = [...myConfig.bakarim.filter(x => !submitted.includes(x))]
             setRB(remain.map(val => <li>{val}</li>))
+
+            let constraints = {}
+            data.map(cons => 
+                constraints[cons.name] = {
+                    'name': cons.name,
+                    'shifts': cons.shifts,
+                    'comments': cons.comments
+                }
+            )
+            setEmpConstraints(constraints)
+            setConsJumbo(<ShowConstraintOf week={week} items={constraints} />)
         })
         .catch(error => alert("tab1 error: " + error))
     }, [week])
+
+    const [consJumbo, setConsJumbo] = useState()
+    const handleChangeWeek = (e) => {
+        setShowAlert2(false)
+        setWeek(e.target.value)
+        setConsJumbo(<ShowConstraintOf week={e.target.value} items={empConstraints}/>)
+    }
 
     const [_88count, set88Count] = useState(0)
 
@@ -68,7 +81,7 @@ function App(props) {
                             <Form.Row>
                                 <Col />
                                 <Col sm="5"><h3>הכנת הסידור לשבוע: </h3></Col>        
-                                <Col sm="5"><ChooseWeek defaultWeek={1} onChange={handleChange}/></Col>
+                                <Col sm="5"><ChooseWeek defaultWeek={1} onChange={handleChangeWeek}/></Col>
                                 <Col />
                             </Form.Row>
                         </Form.Group>
