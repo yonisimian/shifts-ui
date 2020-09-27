@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import ShiftsTable from '../shifts-table/Table'
+import ShiftsTable from './shifts-table/Table'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 //import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -29,12 +29,17 @@ function App(props) {
     })
 
     const [curPage, setCurPage] = useState(0)
-    const shiftsPerPage = 4
+    const [curSection, setCurSection] = useState(0)
+    const shiftsPerPage = 1
+    const pagesPerSection = 5
     const pagination = <Pagination
-                            shifts={shifts}
-                            shiftsPerPage={shiftsPerPage}
+                            items={shifts}
+                            itemsPerPage={shiftsPerPage}
                             curPage={curPage}
-                            setCurPage={setCurPage} />
+                            setCurPage={setCurPage}
+                            pagesPerSection={pagesPerSection}
+                            curSection={curSection}
+                            setCurSection={setCurSection} />
 
     return (
         <main className="App">

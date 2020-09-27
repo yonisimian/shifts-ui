@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ChooseBakar from '../general/chooseBakar.js';
 import ChooseWeek from '../general/chooseWeek.js';
-import { Jumbotron } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
+import { Jumbotron, Container, Row, Col, Form } from 'react-bootstrap';
 import BlocksTable from './blocks-table/Table'
 import { getWeek } from '../../scripts'
+import Pagination from './Pagination'
 
 function App() {
-    const [items, setItems] = useState(null)
+    const [items, setItems] = useState([])
     const [curWeek, setCurWeek] = useState(null)
     const [curEmp, setCurEmp] = useState(null)
 
@@ -20,19 +17,11 @@ function App() {
         fetch("/weekconstraints?week="+week, {method: 'GET'})
         .then(res => res.json())
         .then((result) => {
-            setItems(result['week_constraints'].map(value => 
-                <Row>
-                    <BlocksTable
-                        name={value.name}
-                        week={value.week}
-                        blocks={value.shifts}
-                        comments={value.comments}/>
-                </Row>)
-            )
+            setItems(result['week_constraints'])
             setCurWeek(week)
         })
         .catch(error => {
-            setItems(null)
+            setItems([])
             alert("tab3 error: " + error)
         })
     }
@@ -43,26 +32,17 @@ function App() {
         fetch("/empconstraints?name="+name, {method: 'GET'})
         .then(res => res.json())
         .then((result) => {
-            setItems(result['emp_constraints'].map(value => 
-                <Row>
-                    <BlocksTable
-                        name={value.name}
-                        week={value.week}
-                        blocks={value.shifts}
-                        comments={value.comments}/>
-                </Row>)
-            )
+            setItems(result['emp_constraints'])
             setCurEmp(name)
         })
         .catch(error => {
-            setItems(null)
+            setItems([])
             alert("tab3 error: " + error)
         })
     }
 
-    const CW = <ChooseWeek defaultWeek={1} onChange={handleChangeWeek}/>
-    const CB = <ChooseBakar title="בחר בקר/ית: " onChange={handleChangeEmp} showChooseBakar/>
-    const [secondSelect, setSecondSelect] = useState(CW)
+    const [secondSelect, setSecondSelect] = useState(0)
+    // 0 = choose week, 1 = choose bakar
 
     useEffect(() => {
         handleChangeWeek(getWeek(1))
@@ -70,14 +50,27 @@ function App() {
 
     const handleChange = (e) => {
         if (e.target.value === '1') {
-            setSecondSelect(CB)
-            setItems(null)
+            setSecondSelect(1)
+            setItems([])
         }
         else {
-            setSecondSelect(CW)
+            setSecondSelect(0)
             handleChangeWeek(getWeek(1))
         }
     }
+
+    const [curPage, setCurPage] = useState(0)
+    const [curSection, setCurSection] = useState(0)
+    const itemsPerPage = 1
+    const pagesPerSection = 5
+    const pagination = <Pagination
+                            items={items}
+                            itemsPerPage={itemsPerPage}
+                            curPage={curPage}
+                            setCurPage={setCurPage}
+                            pagesPerSection={pagesPerSection}
+                            curSection={curSection}
+                            setCurSection={setCurSection} />
     
     return (
         <main className="App">
@@ -100,11 +93,31 @@ function App() {
                             </Form.Control>
                         </Col>
                         <Col sm="5">
-                            {secondSelect}
+                            {secondSelect === 0 ?
+                                <ChooseWeek defaultWeek={1} onChange={handleChangeWeek}/>
+                            :
+                                <ChooseBakar title="בחר בקר/ית: " onChange={handleChangeEmp} showChooseBakar/>
+                            }
                         </Col>
                     </Row>
                     <br></br>
-                    {items}
+                    {items && (secondSelect === 1 ?
+                                items.filter((item, index) => index >= curPage * itemsPerPage && index < (curPage + 1) * itemsPerPage)
+                            :
+                                items).map(value => 
+                            <>
+                                <Row>
+                                    <BlocksTable
+                                        name={value.name}
+                                        week={value.week}
+                                        blocks={value.shifts}
+                                        comments={value.comments}/>
+                                </Row>
+                                <hr/>
+                            </>
+                        )
+                    }
+                    {secondSelect === 1 && pagination}
                 </Container>
             </Jumbotron>
         </main>
