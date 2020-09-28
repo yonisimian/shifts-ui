@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Alert from 'react-bootstrap/Alert'
+import {weekToString} from '../../../../scripts'
 
 function App(props) {
     const [showAlert, setShowAlert] = useState(true)
+    const week = weekToString(props.week)
 
     useEffect(() => {
         setShowAlert(true)
@@ -12,7 +14,7 @@ function App(props) {
         showAlert ? 
             props.bakarim.length > 0 ?
             <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-                <Alert.Heading>הבקרים הבאים טרם הגישו משמרות לשבוע {props.week}:</Alert.Heading>
+                <Alert.Heading>הבקרים הבאים טרם הגישו משמרות לשבוע {week}:</Alert.Heading>
                 <p>
                     <ul style={{textAlign: "right"}} >
                         {props.bakarim}
@@ -21,7 +23,7 @@ function App(props) {
             </Alert>
             :
             <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
-                <Alert.Heading>הידד! כל הבקרים הגישו את המשמרות לשבוע {props.week} :)</Alert.Heading>
+                <Alert.Heading>הידד! כל הבקרים הגישו משמרות לשבוע {week} :)</Alert.Heading>
             </Alert>
         : ''
     );

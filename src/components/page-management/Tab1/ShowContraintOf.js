@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 function App(props) {
     const items = props.items
-    const [curEmp, setCurEmp] = useState('')
+    const [curItem, setCurItem] = useState()
 
     return (
         <Container fluid>
@@ -16,15 +16,15 @@ function App(props) {
                                 title="הצג טבלת אילוצים של הבקר/ית: "
                                 isHeader
                                 showChooseBakar
-                                onChange={e => setCurEmp(e.target.value)} /></Col>
+                                onChange={e => setCurItem(items[e.target.value])} /></Col>
             </Row>
             <br></br>
             <Row>
-                {items[curEmp] && <BlocksTable
-                                    name={items[curEmp].name}
+                {curItem && <BlocksTable
+                                    name={curItem.name}
                                     week={props.week}
-                                    blocks={items[curEmp].shifts}
-                                    comments={items[curEmp].comments}/>}
+                                    blocks={curItem.shifts}
+                                    comments={curItem.comments}/>}
             </Row>
         </Container>
     );

@@ -2,26 +2,27 @@ import React from 'react'
 import Row from './Table Row.js'
 import Table from 'react-bootstrap/Table'
 import { Form } from 'react-bootstrap'
+import { weekToString } from '../../../scripts'
 
 function App(props) {
   const shifts = ["בוקר", "ערב", "לילה"]
-  const table_rows = shifts.map((shift) => 
-    <Row header={shift} shifts={props.shifts}/>
-  )
   const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
-  const day_titles = days.map(day => 
-    <th>{day}</th>
-  )
+  const week = weekToString(props.week)
+
   return (
     <div className="ready-table">
-      <h4>טבלת המשמרות לשבוע {props.week}</h4>
+      <h4>טבלת המשמרות לשבוע {week}</h4>
       <Table striped bordered hover>
         <tr>
           <th></th>
-          {day_titles}
+          {days.map(day => 
+            <th>{day}</th>
+          )}
         </tr>
 
-        {table_rows}
+        {shifts.map((shift) => 
+          <Row header={shift} shifts={props.shifts}/>
+        )}
 
       </Table>
       <Form.Control

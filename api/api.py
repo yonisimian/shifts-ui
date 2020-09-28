@@ -123,6 +123,20 @@ def get_schedules():
 
         return ({'schedules' : schedules_table.all()})
 
+@app.route('/getEmpsAndScheds', methods=['GET'])
+def get_emps_and_schedules():
+
+    '''
+    Returns all of the emplyees and schedules together
+    '''
+
+    if request.method == 'GET':
+        schedules_table = db.table('Schedules')
+        employees_table = db.table('Employees')
+
+        return ({'schedules' : schedules_table.all(),
+                 'employees' : employees_table.all()})
+
 @app.route('/weekschedule', methods=['GET', 'POST'])
 def get_week_schedule():
     

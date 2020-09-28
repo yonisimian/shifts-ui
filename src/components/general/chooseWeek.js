@@ -4,10 +4,9 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 
 function App(props) {
-    const title = props.withTitle ? <Form.Label column xs="3">שבוע: </Form.Label> : null
     return (
         <Form.Row>
-            {title}
+            {props.withTitle && <Form.Label column xs="3">שבוע: </Form.Label>}
             <Col xs="9">
                 <Form.Control
                     type="week" // TODO: make it from sunday to saturday

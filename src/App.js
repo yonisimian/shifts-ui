@@ -12,7 +12,6 @@ function App() {
     return (
         <Router>
             <div className="App">
-                {/*currentPage*/}
                 <Switch>
                     <Route exact path='/'><Redirect to={url.submissionPage} /></Route>
                     <Route exact path={url.submissionPage} component={Submission} />

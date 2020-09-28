@@ -7,8 +7,6 @@ import _ from 'lodash'
 function App(props) {
   //const bakarimDB = props.bakarim == undefined ? [] : props.bakarim
   const bakarim = myConfig.bakarim
-  //let bakarimShort = bakarimDB.map(value => value.full_name)
-  //const bakarimFull = bakarimDB.map(value => value.full_name)
   const defaultConstraints = Array.from(Array(21).keys()).map(i => bakarim)
   const defaultUnavailable = Array.from(Array(21).keys()).map(i => [])
 
@@ -83,7 +81,6 @@ function App(props) {
         constraints = defaultConstraints
         unavailable = defaultUnavailable
         setSuggestions(defaultConstraints)
-        //alert("construction table error: " + error)
       }    
     }
   }
@@ -93,26 +90,24 @@ function App(props) {
   }, [props.week, props.ignore])
 
   const shifts = ["בוקר", "ערב", "לילה"]
-  const table_rows = shifts.map((shift) =>
-    <Row
-      header={shift}
-      week={props.week}
-      bakarim={suggestions}
-      handleChange={handleChange}/>
-  )
   const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
-  const day_titles = days.map((day) => 
-    <th>{day}</th>
-  )
 
   return (
     <div>
       <Table striped bordered hover size="sm">
         <tr>
           <th></th>
-          {day_titles}
+          {days.map((day) => 
+            <th>{day}</th>
+          )}
         </tr>
-        {table_rows}
+        {shifts.map((shift) =>
+          <Row
+            header={shift}
+            week={props.week}
+            bakarim={suggestions}
+            handleChange={handleChange}/>
+        )}
       </Table>
     </div>
   );

@@ -9,17 +9,20 @@ import Tab from 'react-bootstrap/Tab'
 
 function App() {
   const [key, setKey] = useState('1')
-  let bakarim
+  const [bakarim, setBakarim] = useState([])
+  const [shifts, setShifts] = useState([])
   useEffect(() => {
-    fetch('/getemployees', {method: 'GET'})
+    fetch('/getEmpsAndScheds', {method: 'GET'})
     .then(res => res.json())
     .then(data => {
-        bakarim = data['all_emps']
+        setBakarim(data['all_emps'])
+        setShifts(data['schedules'])
     })
     .catch(error => {
-        alert("couldn't get bakarim from DB: " + error)
+        alert("couldn't get bakarim or schedules from DB: " + error)
     })
   }, [])
+
 
   return (
     <div>
@@ -34,7 +37,7 @@ function App() {
         <Tab eventKey="1" title="הכנת סידור"><Tab1 bakarim={bakarim} /></Tab>
         <Tab eventKey="2" title="מיוחדים"><Tab2 /></Tab>
         <Tab eventKey="3" title="אילוצים"><Tab3 /></Tab>
-        <Tab eventKey="4" title="היסטוריה"><Tab4 bakarim={bakarim} /></Tab>
+        <Tab eventKey="4" title="היסטוריה"><Tab4 bakarim={bakarim} shifts={shifts} /></Tab>
       </Tabs>
 
     </div>

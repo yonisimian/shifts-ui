@@ -7,18 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Pagination from './Pagination'
 
 function App(props) {
-    const [shifts, setShifts] = useState([])
-    useEffect(() => {
-        fetch('/schedules', {method: 'GET'})
-        .then(res => res.json())
-        .then(data => {
-            setShifts(data['schedules'])
-        })
-        .catch(error => {
-            alert("tab4 error: " +error)
-            setShifts([])
-        })
-    }, [])
+    const shifts = props.shifts
 
     const [dictionary, setDict] = useState([])
     props.bakarim && props.bakarim.map(value => {
