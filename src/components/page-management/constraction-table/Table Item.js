@@ -15,12 +15,23 @@ function App(props) {
     setMyValue(null)
   }, [props.week])
 
+  const customStyles = {
+    /*option: (provided, {data}) => ({
+      ...provided,
+      backgroundColor: props.dictionary[data.value],
+    }),*/
+    multiValue: (provided, {data}) => ({
+      ...provided,
+      backgroundColor: props.dictionary[data.value],
+    })
+  }
+
   return (
     <td>
       <>
         <Select
           className="select-bakarim"
-          // TODO: add colors via styles
+          styles={customStyles}
           placeholder={'-'+bakarim.length+'-'}
           value={myValue}
           options={bakarim_options2}

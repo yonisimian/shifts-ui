@@ -21,7 +21,7 @@ function App(props) {
         </tr>
 
         {shifts.map((shift) => 
-          <Row header={shift} shifts={props.shifts}/>
+          <Row header={shift} shifts={props.shifts} dictionary={props.dictionary}/>
         )}
 
       </Table>

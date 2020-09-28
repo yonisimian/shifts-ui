@@ -9,14 +9,6 @@ import Pagination from './Pagination'
 function App(props) {
     const shifts = props.shifts
 
-    const [dictionary, setDict] = useState([])
-    props.bakarim && props.bakarim.map(value => {
-        setDict([...dictionary, {
-            name: value.full_name,
-            color: value.color
-        }])
-    })
-
     const [curPage, setCurPage] = useState(0)
     const [curSection, setCurSection] = useState(0)
     const shiftsPerPage = 1
@@ -45,7 +37,8 @@ function App(props) {
                                     <ShiftsTable
                                         week={shift.week}
                                         shifts={shift.shifts}
-                                        comments={shift.comments}/>
+                                        comments={shift.comments}
+                                        dictionary={props.dictionary}/>
                                 </Row>
                                 <hr/>
                             </>

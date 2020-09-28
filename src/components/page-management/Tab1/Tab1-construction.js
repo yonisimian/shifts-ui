@@ -111,6 +111,7 @@ function App(props) {
                                             data={data}
                                             week={week}
                                             bakarim={props.bakarim}
+                                            dictionary={props.dictionary}
                                             setShowAlert2={(e) => setShowAlert2(e)}
                                             ignore={ignore}
                                             />

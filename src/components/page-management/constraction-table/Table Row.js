@@ -14,6 +14,7 @@ function App(props) {
     <Item
       header={props.header}
       bakarim={props.bakarim[getID(i)]}
+      dictionary={props.dictionary}
       id={getID(i)}
       week={props.week}
       handleChange={props.handleChange}/>

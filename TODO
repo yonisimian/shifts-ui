@@ -1,14 +1,12 @@
 -----------Bakarim Stuff----------
 -Fix the admin page bag
 -Import bakarim from the DB (with short name for the schedules)
--Colorize shifts-tables according to DB's colors
 
 -----------Tab1 Stuff-------------
 -Calculate and show 8-8s in an alert
 -Remove bakar in construction table item after selecting him in near shifts
 
 -----------Other Stuff------------
--Make a function to translate "2020-W40" to "27/09/20 - 04/10/20"
 -Make week input from sunday to saturday
 -Align the table of Tab1
 -Create Tab2 (calculate specials)

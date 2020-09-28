@@ -106,6 +106,7 @@ function App(props) {
             header={shift}
             week={props.week}
             bakarim={suggestions}
+            dictionary={props.dictionary}
             handleChange={handleChange}/>
         )}
       </Table>

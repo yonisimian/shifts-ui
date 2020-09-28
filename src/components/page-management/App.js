@@ -11,12 +11,20 @@ function App() {
   const [key, setKey] = useState('1')
   const [bakarim, setBakarim] = useState([])
   const [shifts, setShifts] = useState([])
+  const [dictionary, setDict] = useState({})
   useEffect(() => {
     fetch('/getEmpsAndScheds', {method: 'GET'})
     .then(res => res.json())
     .then(data => {
-        setBakarim(data['all_emps'])
         setShifts(data['schedules'])
+        let emps = data['employees']
+        setBakarim(emps)
+
+        let dict = {}
+        emps && emps.map(value =>
+            dict[value.full_name] = value.color
+        )
+        setDict(dict)
     })
     .catch(error => {
         alert("couldn't get bakarim or schedules from DB: " + error)
@@ -34,10 +42,10 @@ function App() {
         activeKey={key}
         onSelect={(k) => setKey(k)}
       >
-        <Tab eventKey="1" title="הכנת סידור"><Tab1 bakarim={bakarim} /></Tab>
+        <Tab eventKey="1" title="הכנת סידור"><Tab1 bakarim={bakarim} dictionary={dictionary}/></Tab>
         <Tab eventKey="2" title="מיוחדים"><Tab2 /></Tab>
         <Tab eventKey="3" title="אילוצים"><Tab3 /></Tab>
-        <Tab eventKey="4" title="היסטוריה"><Tab4 bakarim={bakarim} shifts={shifts} /></Tab>
+        <Tab eventKey="4" title="היסטוריה"><Tab4 bakarim={bakarim} shifts={shifts} dictionary={dictionary}/></Tab>
       </Tabs>
 
     </div>
