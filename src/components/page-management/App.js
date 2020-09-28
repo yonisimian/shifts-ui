@@ -44,7 +44,7 @@ function App() {
       >
         <Tab eventKey="1" title="הכנת סידור"><Tab1 bakarim={bakarim} dictionary={dictionary}/></Tab>
         <Tab eventKey="2" title="מיוחדים"><Tab2 /></Tab>
-        <Tab eventKey="3" title="אילוצים"><Tab3 /></Tab>
+        <Tab eventKey="3" title="אילוצים"><Tab3 bakarim={bakarim} /></Tab>
         <Tab eventKey="4" title="היסטוריה"><Tab4 bakarim={bakarim} shifts={shifts} dictionary={dictionary}/></Tab>
       </Tabs>
 

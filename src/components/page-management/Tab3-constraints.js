@@ -6,7 +6,7 @@ import BlocksTable from './blocks-table/Table'
 import { getWeek } from '../../scripts'
 import Pagination from './Pagination'
 
-function App() {
+function App(props) {
     const [items, setItems] = useState([])
     const [curWeek, setCurWeek] = useState(null)
     const [curEmp, setCurEmp] = useState(null)
@@ -93,7 +93,7 @@ function App() {
                             {secondSelect == 0 ?
                                 <ChooseWeek defaultWeek={1} onChange={handleChangeWeek}/>
                             :
-                                <ChooseBakar title="בחר בקר/ית: " onChange={handleChangeEmp} showChooseBakar/>
+                                <ChooseBakar title="בחר בקר/ית: " bakarim={props.bakarim.map(val => val.full_name)} onChange={handleChangeEmp} showChooseBakar/>
                             }
                         </Col>
                     </Row>

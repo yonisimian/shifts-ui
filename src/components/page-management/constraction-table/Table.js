@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 function App(props) {
   //const bakarimDB = props.bakarim == undefined ? [] : props.bakarim
-  const bakarim = myConfig.bakarim
+  const bakarim = props.bakarim.map(value => value.full_name)
   const defaultConstraints = Array.from(Array(21).keys()).map(i => bakarim)
   const defaultUnavailable = Array.from(Array(21).keys()).map(i => [])
 

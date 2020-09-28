@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Modal from './Modal'
 
-function App() {
+function App(props) {
     const [isModalShown, setShowModal] = useState(false)
     const hideModal = () => {
         setShowModal(false)
@@ -36,7 +36,7 @@ function App() {
             <Jumbotron>
                 <Form ref={form} onSubmit={handleSubmit} method='POST'>
                     <Form.Group>
-                        <Col sm="6"><ChooseBakar withTitle={true}/></Col>
+                        <Col sm="6"><ChooseBakar withTitle={true} bakarim={props.bakarim}/></Col>
                     </Form.Group>
                     <Form.Group>
                         <Col sm="6"><ChooseWeek defaultWeek={1} withTitle={true}/></Col>

@@ -46,7 +46,7 @@ function App(props) {
                 }
             )
             setEmpConstraints(constraints)
-            setConsJumbo(<ShowConstraintOf week={week} items={constraints} />)
+            setConsJumbo(<ShowConstraintOf week={week} items={constraints} bakarim={props.bakarim} />)
             setLoaded(true)
         })
         .catch(error => {
@@ -71,7 +71,7 @@ function App(props) {
     const handleChangeWeek = (e) => {
         setShowAlert2(false)
         setWeek(e.target.value)
-        setConsJumbo(<ShowConstraintOf week={e.target.value} items={empConstraints}/>)
+        setConsJumbo(<ShowConstraintOf week={e.target.value} items={empConstraints} bakarim={props.bakarim}/>)
     }
 
     const [_88count, set88Count] = useState(0)

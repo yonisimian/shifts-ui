@@ -4,8 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 
 function App(props) {
-    // TODO: get the Bakarim list from the DB
-    const bakarim_options = myConfig.bakarim.map((name) => 
+    const bakarim_options = props.bakarim.map((name) => 
         <option value={name}>{name}</option>
     )
     const [b2, setB2] = useState(undefined)

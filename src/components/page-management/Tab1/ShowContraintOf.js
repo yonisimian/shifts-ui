@@ -14,6 +14,7 @@ function App(props) {
                 <Col md="6"><h3>הצג אילוץ של הבקר/ית: </h3></Col>
                 <Col md="6"><ChooseBakar 
                                 title="הצג טבלת אילוצים של הבקר/ית: "
+                                bakarim={props.bakarim.map(val => val.full_name)}
                                 isHeader
                                 showChooseBakar
                                 onChange={e => setCurItem(items[e.target.value])} /></Col>
