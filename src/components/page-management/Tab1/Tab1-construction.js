@@ -2,13 +2,14 @@ import React, {useState, useEffect, useRef } from 'react'
 import useWindowDimensions from '../../general/useWindowDimensions'
 import Table from '../constraction-table/Table'
 import ShowConstraintOf from './ShowContraintOf'
+import NoBakarimDBAlert from './Alerts/Alert-NoBakarimDB'
 import NoShiftsAlert from './Alerts/Alert-NoShifts'
 import NoSubmitAlert from './Alerts/Alert-NoSubmit'
 import _88Alert from './Alerts/Alert-8-8s'
 import SuccessModal from './Modal'
 import ChooseWeek from '../../general/chooseWeek.js'
 import { Container, Col, Form, Jumbotron, Button } from 'react-bootstrap'
-import { getWeek, weekToString } from '../../../scripts'
+import { getWeek } from '../../../scripts'
 import { myConfig } from '../../../config'
 import Spinner from 'react-bootstrap/Spinner'
 
@@ -19,11 +20,13 @@ function App(props) {
     const [data, setData] = useState([])
     const [isLoaded, setLoaded] = useState(false)
     const [ignore, setIgnore] = useState(false)
-    const [week, setWeek] = useState(getWeek(1))
+    const [week, setWeek] = useState(null)
     const [showAlert2, setShowAlert2] = useState(false)
+    const [showAlert3, setShowAlert3] = useState(false)
     const [empConstraints, setEmpConstraints] = useState({})
-    const [remain_bakarim, setRB] = useState(myConfig.bakarim) // TODO: get Bakarim from the DB
+    const [remain_bakarim, setRB] = useState([]) 
     useEffect(() => {
+        if (week == null) return
         setLoaded(false)
         fetch("/weekconstraints?week="+week, {method: 'GET'})
         .then(res => res.json())
@@ -31,8 +34,7 @@ function App(props) {
             let data = result['week_constraints']
             setData(data)
             let submitted = data.map(val => val.name)
-            // TODO: get Bakarim from the DB
-            let remain = [...myConfig.bakarim.filter(x => !submitted.includes(x))]
+            let remain = [...props.bakarim.map(value => value.full_name).filter(x => !submitted.includes(x))]
             setRB(remain.map(val => <li>{val}</li>))
 
             let constraints = {}
@@ -52,6 +54,18 @@ function App(props) {
             setLoaded(true)
         })
     }, [week])
+
+    useEffect(() => {
+        if (props.bakarim.length !== 0) {
+            setShowAlert3(false)
+            setWeek(getWeek(1))
+        }
+        else
+        {
+            setShowAlert3(true)
+            setLoaded(true)
+        }
+    }, [props.bakarim])
 
     const [consJumbo, setConsJumbo] = useState()
     const handleChangeWeek = (e) => {
@@ -81,6 +95,9 @@ function App(props) {
         !isLoaded ? 
             <Spinner animation="border" variant="primary"/>
         :
+        showAlert3 ? 
+            <NoBakarimDBAlert />
+        :
         <main>
             <SuccessModal show={isModalShown} handleClose={hideModal} />
             <NoShiftsAlert bakarim={remain_bakarim} week={week}/>
@@ -106,7 +123,7 @@ function App(props) {
                         <Form.Group>
                             <Form.Row>
                                 <Col sm="12">
-                                    {(windowWidth > minWindowSize && isLoaded) ?
+                                    {(windowWidth > minWindowSize) ?
                                         <Table
                                             data={data}
                                             week={week}

@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 
 function App(props) {
-  const bakarim = props.bakarim
-  const bakarim_options2 = bakarim.map((name) => (
-    { value: name, label: name }
-  ))
+  const bakarim = props.bakarim.map(name => ({value: name, label: name}))
+  //const bakarim_options2 = bakarim.map((name) => ({ value: name, label: name }))
   const temp = bakarim.length == 1 ? { value: bakarim[0], label: bakarim[0] } : undefined
 
   const [isRequired, setIsRequired] = useState(true)
@@ -34,7 +32,7 @@ function App(props) {
           styles={customStyles}
           placeholder={'-'+bakarim.length+'-'}
           value={myValue}
-          options={bakarim_options2}
+          options={bakarim}
           onChange={value => {
             props.handleChange(value, props.id)
             setIsRequired(value == null || value.length === 0)
