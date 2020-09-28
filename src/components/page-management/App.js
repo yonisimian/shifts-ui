@@ -25,6 +25,7 @@ function App() {
             dict[value.full_name] = value.color
             dict[value.short_name] = value.color
             dict["short " + value.full_name] = value.short_name
+            return void 0
         })
         setDict(dict)
     })

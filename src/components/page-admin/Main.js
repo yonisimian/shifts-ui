@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react'
 import {Jumbotron, Container, Row, Col, Table, Button, Form} from 'react-bootstrap'
 import _ from 'lodash'
 import Bakar from './Bakar'
-import { render } from '@testing-library/react'
 
 function App() {
     const form = useRef()

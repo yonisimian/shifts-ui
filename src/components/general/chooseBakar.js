@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import { myConfig } from '../../config.js'
+import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 

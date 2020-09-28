@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import ShiftsTable from './shifts-table/Table'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 //import Container from 'react-bootstrap/Container'

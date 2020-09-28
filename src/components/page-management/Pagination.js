@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Pagination from 'react-bootstrap/Pagination'
 
 function App(props) {
@@ -55,7 +55,7 @@ function App(props) {
                     <Pagination.Ellipsis onClick={setPrevSection} />
                 </>
             }
-            {items.filter((shift, shiftID) => shiftID % itemsPerPage == 0)
+            {items.filter((shift, shiftID) => shiftID % itemsPerPage === 0)
                     .filter((shift, page) => page < pagesPerSection * (curSection + 1) && page >= pagesPerSection * curSection)
                     .map((shift, index) =>
                 <Pagination.Item

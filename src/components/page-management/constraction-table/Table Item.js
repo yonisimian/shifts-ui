@@ -4,7 +4,7 @@ import Select from 'react-select'
 function App(props) {
   const dictionary = props.dictionary
   const bakarim = props.bakarim.map(name => ({value: name, label: dictionary["short " + name]}))
-  const temp = bakarim.length == 1 ? { value: bakarim[0], label: bakarim[0] } : undefined
+  const temp = bakarim.length === 1 ? { value: bakarim[0], label: bakarim[0] } : undefined
 
   const [isRequired, setIsRequired] = useState(true)
   const [myValue, setMyValue] = useState(/*temp*/)

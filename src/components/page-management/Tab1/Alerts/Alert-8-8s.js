@@ -3,10 +3,10 @@ import Alert from 'react-bootstrap/Alert'
 
 function App(props) {
     const count = props.count
-    const [showAlert, setShowAlert] = useState(count != 0)
+    const [showAlert, setShowAlert] = useState(count !== 0)
 
     useEffect(() => {
-        setShowAlert(count != 0)
+        setShowAlert(count !== 0)
     }, [props.count])
 
     return (

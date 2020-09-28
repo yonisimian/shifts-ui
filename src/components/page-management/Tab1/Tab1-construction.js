@@ -8,13 +8,11 @@ import NoSubmitAlert from './Alerts/Alert-NoSubmit'
 import _88Alert from './Alerts/Alert-8-8s'
 import SuccessModal from './Modal'
 import ChooseWeek from '../../general/chooseWeek.js'
-import { Container, Col, Form, Jumbotron, Button } from 'react-bootstrap'
+import { Container, Col, Form, Jumbotron, Button, Spinner } from 'react-bootstrap'
 import { getWeek } from '../../../scripts'
-import { myConfig } from '../../../config'
-import Spinner from 'react-bootstrap/Spinner'
 
 function App(props) {
-    const {windowWidth, windowHeight} = useWindowDimensions()
+    const {windowWidth} = useWindowDimensions()
     const minWindowSize = 85.0
     const form = useRef(null)
     const [data, setData] = useState([])

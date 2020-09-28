@@ -1,5 +1,4 @@
 import React from 'react';
-import FormCheck from 'react-bootstrap/FormCheck'
 
 function App(props) {
   let id = props.id

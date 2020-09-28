@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState} from 'react'
 import {Button, Form} from 'react-bootstrap'
 
 function App(props) {
@@ -14,14 +14,16 @@ function App(props) {
         switch (e.target.id) {
             case "fullName":
                 setFullName(e.target.value);
-                e.target.className = e.target.value != full_name ? "form-control text-danger" : "form-control"
+                e.target.className = e.target.value !== full_name ? "form-control text-danger" : "form-control"
                 break;
             case "shortName":
                 setShortName(e.target.value);
-                e.target.className = e.target.value != short_name ? "form-control text-danger" : "form-control"
+                e.target.className = e.target.value !== short_name ? "form-control text-danger" : "form-control"
                 break;
             case "color":
                 setBGColor(e.target.value);
+                break;
+            default:
                 break;
         }
     }

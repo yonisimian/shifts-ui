@@ -8,8 +8,10 @@ import Pagination from './Pagination'
 
 function App(props) {
     const [items, setItems] = useState([])
-    const [curWeek, setCurWeek] = useState(null)
-    const [curEmp, setCurEmp] = useState(null)
+    const [curPage, setCurPage] = useState(0)
+    const [curSection, setCurSection] = useState(0)
+    const itemsPerPage = 1
+    const pagesPerSection = 5
 
     const handleChangeWeek = (e) => {
         if (e == null) return
@@ -18,7 +20,8 @@ function App(props) {
         .then(res => res.json())
         .then((result) => {
             setItems(result['week_constraints'])
-            setCurWeek(week)
+            setCurPage(0)
+            setCurSection(0)
         })
         .catch(error => {
             setItems([])
@@ -33,7 +36,8 @@ function App(props) {
         .then(res => res.json())
         .then((result) => {
             setItems(result['emp_constraints'])
-            setCurEmp(name)
+            setCurPage(0)
+            setCurSection(0)
         })
         .catch(error => {
             setItems([])
@@ -56,10 +60,6 @@ function App(props) {
             handleChangeWeek(getWeek(1))
     }
 
-    const [curPage, setCurPage] = useState(0)
-    const [curSection, setCurSection] = useState(0)
-    const itemsPerPage = 1
-    const pagesPerSection = 5
     const pagination = <Pagination
                             items={items}
                             itemsPerPage={itemsPerPage}
@@ -90,7 +90,7 @@ function App(props) {
                             </Form.Control>
                         </Col>
                         <Col sm="5">
-                            {secondSelect == 0 ?
+                            {secondSelect === 0 ?
                                 <ChooseWeek defaultWeek={1} onChange={handleChangeWeek}/>
                             :
                                 <ChooseBakar title="בחר בקר/ית: " bakarim={props.bakarim.map(val => val.full_name)} onChange={handleChangeEmp} showChooseBakar/>
@@ -98,7 +98,7 @@ function App(props) {
                         </Col>
                     </Row>
                     <br></br>
-                    {items && (secondSelect == 1 ?
+                    {items && (secondSelect === 1 ?
                                 items.filter((item, index) => index >= curPage * itemsPerPage && index < (curPage + 1) * itemsPerPage)
                             :
                                 items).map(value => 
@@ -114,7 +114,7 @@ function App(props) {
                             </>
                         )
                     }
-                    {secondSelect == 1 && pagination}
+                    {secondSelect === 1 && pagination}
                 </Container>
             </Jumbotron>
         </main>

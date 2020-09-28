@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Row from './Table Row'
 import Table from 'react-bootstrap/Table'
-import {myConfig} from '../../../config'
 import _ from 'lodash'
 
 function App(props) {
@@ -18,7 +17,7 @@ function App(props) {
 
   const upsert = (array, list) => {
     list.forEach(item => {
-      let i = array.findIndex(_item => _item.id == item.id)
+      let i = array.findIndex(_item => _item.id === item.id)
       if (i === -1) array.push(item)
     })
   }
@@ -75,7 +74,7 @@ function App(props) {
           .filter(v => v.name === bakar)[0].shifts[i]==null))
         constraints = bakarimLists
         setSuggestions(bakarimLists)
-        bakarimLists.map(list => list.length == 0 ? props.setShowAlert2(true) : void 0)
+        bakarimLists.map(list => list.length === 0 ? props.setShowAlert2(true) : void 0)
       }
       catch (error) {
         constraints = defaultConstraints

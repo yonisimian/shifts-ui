@@ -8,7 +8,7 @@ function App(props) {
 
     useEffect(() => {
         setShowAlert(true)
-    }, [props.week])
+    }, [week])
 
     return (
         showAlert ? 

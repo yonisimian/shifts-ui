@@ -1,6 +1,5 @@
 -----------Bakarim Stuff----------
 -Fix the admin page bag
--Import bakarim from the DB (with short name for the schedules)
 
 -----------Tab1 Stuff-------------
 -Calculate and show 8-8s in an alert
@@ -9,8 +8,8 @@
 -----------Other Stuff------------
 -Make week input from sunday to saturday
 -Align the table of Tab1
--Create Tab2 (calculate specials)
--Make shifts-count and 8-8 mini tables near every shifts-table in Tab4
+-Create Tab2 (statistics)
+-Make shifts-count, 8-8, and specials mini tables near every shifts-table in Tab4
 
 ----------To Production-----------
 -Make construction table item required
