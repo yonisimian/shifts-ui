@@ -62,8 +62,11 @@ function App(props) {
         }
         else
         {
-            setShowAlert3(true)
-            setLoaded(true)
+            const timer = setTimeout(() => {
+                setShowAlert3(true)
+                setLoaded(true)
+            }, 5000)
+            return () => clearTimeout(timer)
         }
     }, [props.bakarim])
 

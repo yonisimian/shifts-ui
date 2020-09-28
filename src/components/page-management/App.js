@@ -21,9 +21,11 @@ function App() {
         setBakarim(emps)
 
         let dict = {}
-        emps && emps.map(value =>
+        emps && emps.map(value => {
             dict[value.full_name] = value.color
-        )
+            dict[value.short_name] = value.color
+            dict["short " + value.full_name] = value.short_name
+        })
         setDict(dict)
     })
     .catch(error => {

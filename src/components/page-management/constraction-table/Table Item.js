@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 
 function App(props) {
-  const bakarim = props.bakarim.map(name => ({value: name, label: name}))
-  //const bakarim_options2 = bakarim.map((name) => ({ value: name, label: name }))
+  const dictionary = props.dictionary
+  const bakarim = props.bakarim.map(name => ({value: name, label: dictionary["short " + name]}))
   const temp = bakarim.length == 1 ? { value: bakarim[0], label: bakarim[0] } : undefined
 
   const [isRequired, setIsRequired] = useState(true)
@@ -16,11 +16,11 @@ function App(props) {
   const customStyles = {
     /*option: (provided, {data}) => ({
       ...provided,
-      backgroundColor: props.dictionary[data.value],
+      backgroundColor: dictionary[data.value],
     }),*/
     multiValue: (provided, {data}) => ({
       ...provided,
-      backgroundColor: props.dictionary[data.value],
+      backgroundColor: dictionary[data.value],
     })
   }
 
