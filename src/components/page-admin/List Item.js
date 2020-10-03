@@ -5,7 +5,7 @@ function App(props) {
     const {data, lineNumber, isEditable, removeSelf} = props
     const { full_name, short_name, color } = data
     const id = lineNumber - 1
-
+    
     const [fullName, setFullName] = useState(full_name)
     const [shortName, setShortName] = useState(short_name)
     const [backGroundColor, setBGColor] = useState(color)
@@ -40,7 +40,7 @@ function App(props) {
                     maxLength={24}
                     style={{backgroundColor: backGroundColor}}
                     disabled={!isEditable}
-                    onChange={handleChange} />
+                    onChange={handleChange}/>
             </td>
             <td>
                 <Form.Control

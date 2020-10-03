@@ -8,10 +8,14 @@
 -----------Other Stuff------------
 -Make week input from sunday to saturday
 -Align the table of Tab1
--Create Tab2 (statistics)
--Make shifts-count, 8-8, and specials mini tables near every shifts-table in Tab4
 
-----------To Production-----------
+----------Backend Stuff-----------
+-Sort data sent to front by date (Schedules, Blocks pre employee)
+-Make shifts-count, 8-8, and specials mini tables near every shifts-table in Tab4
+-Create Tab2 (statistics)
+
+
+----------Before Production-----------
 -Make construction table item required
 -Clear old constraints and shifts
 -Clean code:
@@ -20,3 +24,14 @@
     -imports
     -all errors and warnings
 -Clean NPM
+-Put node_modules on RAM?
+
+
+
+
+
+----------V2.0 Stuff---------------
+-Calculate schedules alone and let Dekel choose from the options
+-Put date titles in headings of tables (along day name)
+-Create drag'n'drop functionality to bakarim table in Admin page
+-Add hot mobile logo and more background pictures to make it cool 8-)

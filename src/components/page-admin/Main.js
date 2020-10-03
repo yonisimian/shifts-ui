@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {Jumbotron, Container, Row, Col, Table, Button, Form} from 'react-bootstrap'
 import _ from 'lodash'
-import Bakar from './Bakar'
+import Item from './List Item'
 
 function App() {
     const form = useRef()
@@ -41,7 +41,6 @@ function App() {
     }
 
     const removeBakar = (id) => {
-        alert("id: " + id + ", bakar: " + JSON.stringify(bakarim[id]))
         let newBakarim = bakarim.filter((val, key) => key !== id)
         setBakarim(newBakarim)
     }
@@ -56,7 +55,7 @@ function App() {
                         </Row>
                         <Row>
                             {!isEditable ?
-                                <Button variant="outline-primary" onClick={() => setisEditable(true)}>ערוך</Button>
+                                <Button variant="outline-primary" onClick={() => /*setisEditable(true)*/ alert("Work In Progress")}>ערוך</Button>
                             :
                                 <>
                                     <br />
@@ -78,7 +77,7 @@ function App() {
                                 </thead>
                                 <tbody>
                                     {bakarim.map((bakar, index) => (
-                                        <Bakar
+                                        <Item
                                             data={bakar}
                                             lineNumber={index+1}
                                             isEditable={isEditable}

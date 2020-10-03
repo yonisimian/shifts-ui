@@ -90,7 +90,7 @@ function App(props) {
                             </Form.Control>
                         </Col>
                         <Col sm="5">
-                            {secondSelect === 0 ?
+                            {secondSelect == 0 ?
                                 <ChooseWeek defaultWeek={1} onChange={handleChangeWeek}/>
                             :
                                 <ChooseBakar title="בחר בקר/ית: " bakarim={props.bakarim.map(val => val.full_name)} onChange={handleChangeEmp} showChooseBakar/>
@@ -98,7 +98,7 @@ function App(props) {
                         </Col>
                     </Row>
                     <br></br>
-                    {items && (secondSelect === 1 ?
+                    {items && (secondSelect == 1 ?
                                 items.filter((item, index) => index >= curPage * itemsPerPage && index < (curPage + 1) * itemsPerPage)
                             :
                                 items).map(value => 
@@ -114,7 +114,7 @@ function App(props) {
                             </>
                         )
                     }
-                    {secondSelect === 1 && pagination}
+                    {secondSelect == 1 && pagination}
                 </Container>
             </Jumbotron>
         </main>

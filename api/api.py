@@ -2,12 +2,16 @@ from flask import Flask, render_template, url_for, request, jsonify
 from tinydb import TinyDB, Query
 import json
 import time, datetime
+from utils import count_8_8, count_specials
 
 # app declaration
 app = Flask(__name__)
 
 # DB config
-db = TinyDB('db.json')
+db = TinyDB('db.json', sort_keys=True, indent=4)
+
+# Development DB config
+# db = TinyDB('test_db.json', sort_keys=True, indent=4, seperators=(',', ': '))
 
 @app.route('/submitconstraints', methods=['GET', 'POST'])
 def submit_constraints():
@@ -28,9 +32,6 @@ def submit_constraints():
         inserted = cons_table.upsert({'name':name, 'week':week, 'shifts':shifts, 'comments':comments},
                    ((user.name == name) & (user.week == week)))
 
-        # print(inserted)
-        # TODO: check what does upsert returns.
-
         return ({'submitted data': inserted})
 
 @app.route('/submitschedule', methods=['GET', 'POST'])
@@ -48,8 +49,16 @@ def submit_schedule():
         week = request.form.get('week')
         comments = request.form.get('comments')
         shifts = [json.loads(request.form.get(f'shift-{i}')) for i in range(0,21)]
+        short_rest_shifts = count_8_8(shifts)
+        specials = count_specials(shifts)
 
-        inserted = schedules_table.upsert({'week':week, 'shifts': shifts, 'comments': comments}, (user.week == week))
+
+        inserted = schedules_table.upsert({'week':week,
+                                           'shifts': shifts,
+                                           'comments': comments,
+                                           '8_8_shifts': short_rest_shifts,
+                                           'specials': specials},
+                                          (user.week == week))
 
         return ({'submitted data': inserted})
 
@@ -121,7 +130,7 @@ def get_schedules():
     if request.method == 'GET':
         schedules_table = db.table('Schedules')
 
-        return ({'schedules' : schedules_table.all()})
+        return ({'schedules' : sorted(schedules_table.all(), key=lambda x: (x['week'], x['name']), reverse=True)})
 
 @app.route('/getEmpsAndScheds', methods=['GET'])
 def get_emps_and_schedules():
@@ -134,7 +143,7 @@ def get_emps_and_schedules():
         schedules_table = db.table('Schedules')
         employees_table = db.table('Employees')
 
-        return ({'schedules' : schedules_table.all(),
+        return ({'schedules' : sorted(schedules_table.all(), key=lambda x: x['week'], reverse=True),
                  'employees' : employees_table.all()})
 
 @app.route('/weekschedule', methods=['GET', 'POST'])
