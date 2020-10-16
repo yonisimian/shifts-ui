@@ -63,7 +63,7 @@ def submit_schedule():
                                            'shifts': shifts,
                                            'comments': comments,
                                            'shift_counts': statistics['shift_counts'],
-                                           '8_8_shifts': statistics['short_rest_shifts'],
+                                           '_8_8_shifts': statistics['short_rest_shifts'],
                                            'specials': statistics['specials']},
                                           (user.week == week))
 
