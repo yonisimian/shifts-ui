@@ -8,6 +8,7 @@ function App() {
     <footer>
       <div>
         <h6>Created by Guy Shamilian & Yehonatan Simian © 2020</h6>
+        {/* <h6 dir='ltr'>Special thanks to Bana ♥</h6> */}
         <Nav>
           <ul style={{textAlign: "right"}}>
             <li><NavLink to={url.submissionPage}>הגשת משמרות</NavLink></li>

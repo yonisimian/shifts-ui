@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import ShiftsTable from './shifts-table/Table'
+import MiniTable from './mini-table/Table'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 //import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Pagination from './Pagination'
+import Pagination from '../general/Pagination'
+import { weekToString } from '../../scripts'
 
 function App(props) {
     const shifts = props.shifts
@@ -34,11 +36,18 @@ function App(props) {
                         .map((shift, index) => 
                             <>
                                 <Row>
+                                    <Col ><h5>טבלת המשמרות לשבוע {shift.week.slice(6,8)} בתאריכים {weekToString(shift.week)}</h5></Col>
+                                </Row>
+                                <Row>
                                     <ShiftsTable
-                                        week={shift.week}
                                         shifts={shift.shifts}
                                         comments={shift.comments}
-                                        dictionary={props.dictionary}/>
+                                        dictionary={props.dictionary} />
+                                    <MiniTable
+                                        counts={shift.shift_counts}
+                                        _88={shift._8_8_shifts}
+                                        specials={shift.specials}
+                                        dictionary={props.dictionary} />
                                 </Row>
                                 <hr/>
                             </>

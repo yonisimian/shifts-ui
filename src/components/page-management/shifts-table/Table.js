@@ -1,20 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Row from './Table Row.js'
 import Table from 'react-bootstrap/Table'
 import { Form } from 'react-bootstrap'
-import { weekToString } from '../../../scripts'
+import './jump.css'
 
 function App(props) {
   const shifts = ["בוקר", "ערב", "לילה"]
   const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
-  const week = weekToString(props.week)
+  const [style, setStyle] = useState('ready-table')
+
+  const switchStyle = () => {
+    setStyle(style === 'ready-table' ? 'ready-table box bounce-7' : 'ready-table')
+  }
 
   return (
-    <div className="ready-table">
-      <h4>טבלת המשמרות לשבוע {week}</h4>
+    <div className={style}>
       <Table striped bordered hover>
         <tr>
-          <th></th>
+          <th onDoubleClick={switchStyle}></th>
           {days.map(day => 
             <th>{day}</th>
           )}
@@ -29,6 +32,12 @@ function App(props) {
         as="textarea"
         className="unresizeable"
         disabled>{props.comments}</Form.Control>
+
+      {style !== 'ready-table' && 
+      <>
+        <br/>
+        <h6 dir='ltr'>Special thanks to Bana ♥</h6>
+      </>}
     </div>
   );
 }

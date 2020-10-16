@@ -13,7 +13,7 @@ import { getWeek } from '../../../scripts'
 
 function App(props) {
     const {windowWidth} = useWindowDimensions()
-    const minWindowSize = 85.0
+    const minWindowSize = 1420.69
     const form = useRef(null)
     const [data, setData] = useState([])
     const [isLoaded, setLoaded] = useState(false)

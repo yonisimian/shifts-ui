@@ -40,7 +40,7 @@ function App() {
       <Header title="טופס ניהול משמרות" />
 
       <Tabs
-        style={{margin: "auto auto 10px auto", maxWidth: "800px"}}
+        style={{margin: "auto auto 10px auto", maxWidth: "1420px"}}
         defaultActiveKey={key}
         activeKey={key}
         onSelect={(k) => setKey(k)}

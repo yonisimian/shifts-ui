@@ -93,7 +93,7 @@ function App(props) {
 
   return (
     <div>
-      <Table striped bordered hover size="sm">
+      <Table className="q" striped bordered hover size="sm">
         <tr>
           <th></th>
           {days.map((day) => 

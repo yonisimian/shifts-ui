@@ -6,14 +6,16 @@
 -Remove bakar in construction table item after selecting him in near shifts
 
 -----------Other Stuff------------
+-On schedule submission, send ShortName to back instead of FullName
 -Make week input from sunday to saturday
--Align the table of Tab1
+-Align the table of Tab1e
+-Refresh the pages whrn selected while selected
 
 ----------Backend Stuff-----------
 -Sort data sent to front by date (Schedules, Blocks pre employee)
--Make shifts-count, 8-8, and specials mini tables near every shifts-table in Tab4
 -Create Tab2 (statistics)
-
+-Change the name of the 8-8 shifts in the DB to _8_8_shifts
+-
 
 ----------Before Production-----------
 -Make construction table item required
@@ -26,9 +28,8 @@
 -Clean NPM
 -Put node_modules on RAM?
 
-
-
-
+------------Production----------------
+- Set the 
 
 ----------V2.0 Stuff---------------
 -Calculate schedules alone and let Dekel choose from the options

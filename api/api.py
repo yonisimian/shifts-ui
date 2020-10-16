@@ -2,16 +2,22 @@ from flask import Flask, render_template, url_for, request, jsonify
 from tinydb import TinyDB, Query
 import json
 import time, datetime
-from utils import count_8_8, count_specials
+from utils import count_statistics
 
 # app declaration
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder='../build',
+            static_url_path='/')
 
 # DB config
 db = TinyDB('db.json', sort_keys=True, indent=4)
 
 # Development DB config
 # db = TinyDB('test_db.json', sort_keys=True, indent=4, seperators=(',', ': '))
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/submitconstraints', methods=['GET', 'POST'])
 def submit_constraints():
@@ -49,15 +55,16 @@ def submit_schedule():
         week = request.form.get('week')
         comments = request.form.get('comments')
         shifts = [json.loads(request.form.get(f'shift-{i}')) for i in range(0,21)]
-        short_rest_shifts = count_8_8(shifts)
-        specials = count_specials(shifts)
+        statistics = count_statistics(shifts)['Statistics']
 
+        print(statistics)
 
         inserted = schedules_table.upsert({'week':week,
                                            'shifts': shifts,
                                            'comments': comments,
-                                           '8_8_shifts': short_rest_shifts,
-                                           'specials': specials},
+                                           'shift_counts': statistics['shift_counts'],
+                                           '8_8_shifts': statistics['short_rest_shifts'],
+                                           'specials': statistics['specials']},
                                           (user.week == week))
 
         return ({'submitted data': inserted})

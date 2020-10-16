@@ -4,7 +4,7 @@ import ChooseWeek from '../general/chooseWeek.js';
 import { Jumbotron, Container, Row, Col, Form } from 'react-bootstrap';
 import BlocksTable from './blocks-table/Table'
 import { getWeek } from '../../scripts'
-import Pagination from './Pagination'
+import Pagination from '../general/Pagination'
 
 function App(props) {
     const [items, setItems] = useState([])
