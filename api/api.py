@@ -256,6 +256,6 @@ def get_week_constraints():
 #         return (removed)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(use_reloader=True, port=5000, threaded=True, debug=True)
 
 #made by: Guy the back man 8-) [works from the back :)]
