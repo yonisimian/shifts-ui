@@ -1,25 +1,25 @@
 -----install stuff from internet-----
 -npm
 -node
--python(3?)
+-python3
 -git
 -check if each is installed via $ npm --version
 
 -----set up git-----
 -if you start a new project:
----cd to documents (or wherever you want)
----$ git init
+   -cd to documents (or wherever you want)
+   -$ git init
 -let git know who you are:
----$ git config --global user.email "yonisimian@email.com"
----$ git config --global user.name "yonisimian"
+   -$ git config --global user.email "yonisimian@email.com"
+   -$ git config --global user.name "yonisimian"
 
 -----import project from github------
 -cd to documents
 -clone the repository via $ git clone https://github.com/yonisimian/shifts-ui.git
 -??connect to remote (not sure about next two lines):
----$ cd shifts-ui
----$ git remote add origin https://github.com/yonisimian/shifts-ui.git
----make sure you're connected via $ git remote -v
+   -$ cd shifts-ui
+   -$ git remote add origin https://github.com/yonisimian/shifts-ui.git
+   -make sure you're connected via $ git remote -v
 -install missing dependencies via $ npm install
 
 -----commit changes and push back to github-----
@@ -30,12 +30,18 @@
 
 -----start a develompent server-----
 -start flask:
----cd to shifts-ui\api
----$ export FLASK_APP=app.py
----$ flask run -h 0.0.0.0 -p 8000
+   -cd to shifts-ui\api
+   -on linux:
+       -$ source env\bin\activate
+       -$ export FLASK_APP=api.py
+       -$ flask run -h 0.0.0.0 -p 5000
+    -on windows:
+       -$ win_env\Scripts\activate
+       -$ set FLASK_APP=api.py
+       -$ flask run -h 0.0.0.0 -p 5000
 -start react (on another terminal):
----cd to shifts-ui
----$ npm start
+   -cd to shifts-ui
+   -$ npm start
 
 -----start a production server-----
 -absolutly no idea :)
