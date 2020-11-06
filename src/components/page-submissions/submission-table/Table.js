@@ -7,7 +7,8 @@ function App() {
   const table_rows = shifts.map((shift) => 
     <Row header={shift} />
   )
-  const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
+  //const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
+  const days = ["א", "ב", "ג", "ד", "ה", "ו", "ש"]
   const day_titles = days.map((day) => 
     <th>{day}</th>
   )
