@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <Header title="טופס הגשת משמרות שבועיות" />
+      <Header title="הגשת משמרות" />
       <Main bakarim={bakarim}/>
     </div>
   );

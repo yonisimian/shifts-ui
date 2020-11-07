@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div>
-      <Header title="טופס ניהול משמרות" />
+      <Header title="ניהול משמרות" />
 
       <Tabs
         style={{margin: "auto auto 10px auto", maxWidth: "1420px"}}
