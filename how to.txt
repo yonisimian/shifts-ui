@@ -2,6 +2,9 @@
 -npm
 -node
 -python3
+-in virtual enviroment:
+   -Flask
+   -TinyDB
 -git
 -check if each is installed via $ npm --version
 
