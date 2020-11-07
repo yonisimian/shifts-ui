@@ -36,3 +36,10 @@
 -Put date titles in headings of tables (along day name)
 -Create drag'n'drop functionality to bakarim table in Admin page
 -Add hot mobile logo and more background pictures to make it cool 8-)
+-Make login pages for Management and for Admin pages
+
+----------V3.0 Stuff---------------
+# V3.0 will be totally modular and will be able to serve other teams and not just our Bakara.
+-make super-admin page where we can change myConfig which is:
+    -shift_kinds (בוקר ערב לילה)
+    -days (ראשון שני שלישי וכו')

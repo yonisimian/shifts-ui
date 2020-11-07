@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Row from './Table Row'
 import Table from 'react-bootstrap/Table'
 import _ from 'lodash'
+import { myConfig } from '../../../config'
 
 function App(props) {
   //const bakarimDB = props.bakarim == undefined ? [] : props.bakarim
@@ -88,8 +89,8 @@ function App(props) {
     updateTable(props.ignore)
   }, [props.week, props.ignore])
 
-  const shifts = ["בוקר", "ערב", "לילה"]
-  const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
+  const shifts = myConfig.shift_kinds
+  const days = myConfig.days_long
 
   return (
     <div>
@@ -103,6 +104,7 @@ function App(props) {
         {shifts.map((shift) =>
           <Row
             header={shift}
+            myConfig={myConfig}
             week={props.week}
             bakarim={suggestions}
             dictionary={props.dictionary}

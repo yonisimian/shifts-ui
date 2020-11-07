@@ -1,9 +1,10 @@
 import React from 'react';
 
 function App(props) {
-  let id = props.id
-  if (props.header === 'ערב') id++
-  else if (props.header === 'לילה') id += 2
+  let i = 0
+  while (props.header !== props.shift_kinds[i])
+    i++;
+  let id = props.id + i
 
   const x = (props.blocks[id] === 'on' ? 'X' : '')
 

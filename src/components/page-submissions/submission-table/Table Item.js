@@ -2,9 +2,12 @@ import React from 'react';
 import './checkbox.css'
 
 function App(props) {
-  let id = props.id
-  if (props.header === 'ערב') id++
-  else if (props.header === 'לילה') id += 2
+  let header = props.header
+  let shift_kinds = props.shift_kinds
+  let i = 0
+  while (header !== shift_kinds[i])
+    i++;
+  let id = props.id + i
 
   return (
     <td>

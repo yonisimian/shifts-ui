@@ -2,11 +2,12 @@ import React from 'react'
 import Row from './Table Row.js'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
-import {weekToString} from '../../../scripts'
+import { myConfig } from '../../../config'
+import { weekToString } from '../../../scripts'
 
 function App(props) {
-  const shifts = ["בוקר", "ערב", "לילה"]
-  const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
+  const shifts = myConfig.shift_kinds
+  const days = myConfig.days
   const week = weekToString(props.week)
 
   return (
@@ -21,7 +22,7 @@ function App(props) {
         </tr>
 
         {shifts.map((shift) => 
-          <Row header={shift} blocks={props.blocks}/>
+          <Row header={shift} blocks={props.blocks} myConfig={myConfig} />
         )}
 
       </Table>

@@ -1,14 +1,14 @@
 import React from 'react'
-import Row from './Table Row.js'
+import Row from './Table Row'
 import Table from 'react-bootstrap/Table'
+import { myConfig } from '../../../config'
 
 function App() {
-  const shifts = ["בוקר", "ערב", "לילה"]
+  const shifts = myConfig.shift_kinds
   const table_rows = shifts.map((shift) => 
-    <Row header={shift} />
+    <Row header={shift} myConfig={myConfig} />
   )
-  //const days = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"]
-  const days = ["א", "ב", "ג", "ד", "ה", "ו", "ש"]
+  const days = myConfig.days
   const day_titles = days.map((day) => 
     <th>{day}</th>
   )
