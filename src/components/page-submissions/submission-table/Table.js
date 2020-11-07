@@ -2,6 +2,7 @@ import React from 'react'
 import Row from './Table Row'
 import Table from 'react-bootstrap/Table'
 import { myConfig } from '../../../config'
+import './subs-table.css'
 
 function App() {
   const shifts = myConfig.shift_kinds

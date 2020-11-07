@@ -1,5 +1,4 @@
 import React from 'react';
-import './checkbox.css'
 
 function App(props) {
   let header = props.header
