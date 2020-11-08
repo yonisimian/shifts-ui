@@ -1,0 +1,22 @@
+version: "3"
+services:
+        frontend:
+                container_name: frontend
+                build:
+                        context: ./frontend
+                        dockerfile: Dockerfile
+                ports:
+                        - 80:80
+
+        api:
+                restart: always
+                container_name: api
+                build: ./api
+                expose:
+                        - 5000
+                volumes:
+                        - ./backend:/usr/src/shifts-ui
+                environment:
+                        - FLASK_ENV=development
+                        - FLASK_APP=api.py
+                        - FLASK_DEBUG=1
